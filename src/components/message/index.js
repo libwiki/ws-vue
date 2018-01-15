@@ -1,24 +1,30 @@
 import Vue from 'vue'
+import Modal from '../modal'
 import Message from './message'
 Message.Instance=function(options={}){
 	const Instance=new Vue({
 		data:Object.assign(options,{
 			opacity:0.75,
-			isShow:false,
+			show:false,
 			autoClose:true,
 			continueTime:1800,
 			timer:null,
 			message:'',
+			zIndex:Modal.zIndex,
 		}),
 		render(h){
 			return h(Message,{
 				props:{
 					message:this.message,
-					isShow:this.isShow,
+					show:this.show,
 					opacity:this.opacity,
-				}
+				},
+				style:{
+					'z-index':this.zIndex+20180115,
+				},
 			})
 		},
+		
 		methods:{
 			setMsg(msg,continueTime){
 				if(!msg)return;
@@ -31,11 +37,11 @@ Message.Instance=function(options={}){
 				if(this.autoClose)this.close()
 			},
 			open(){
-				this.isShow=true
+				this.show=true
 			},
 			close(){
 				this.timer=setTimeout(_=>{
-					this.isShow=false
+					this.show=false
 				},this.continueTime)
 			}
 

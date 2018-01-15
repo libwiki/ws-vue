@@ -53,27 +53,39 @@
         <div class="ws-table-td">td</div>
       </div>
     </div>
-    <lay-head></lay-head>
-
+    <!-- <msg-box :show="true" content="这是内容"></msg-box> -->
+    <msg-box :show="show" @close="close">
+      <p>
+        <h1>这是内容2</h1>
+        <h2>这是内容2</h2>
+        <h3>这是内容2</h3>
+        <h4>这是内容2</h4>
+      </p>
+    </msg-box>
 
   </div>
 </template>
 
 <script>
-import Icon from './components/icon'
 export default {
   name: 'app',
   created(){
-    //this.$modal.open()
-    this.$msg('这是提示信息1')
-    this.$msg('这是提示信息2')
-    this.$msg('这是提示信息3')
-    this.$msg('这是提示信息4')
+    //this.$msg('这是提示信息1')
+    //this.$msgbox('这是提示信息0000','标题',true)
+    
+  },
+  data(){
+    return {
+      show:true
+    }
   },
   methods:{
     btnClick(e){
       console.log(e);
     },
+    close(e){
+      this.show=false;
+    }
   },
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-	<span :class="prefix" v-if="isShow" :style="styles">
+	<span :class="prefix" v-if="show" :style="styles">
 		{{message}}
 	</span>
 </template>
@@ -9,7 +9,7 @@
 		props:{
 			message:String,
 			opacity:{default:0.75},
-			isShow:{type:Boolean,default:false},
+			show:{type:Boolean,default:false},
 		},
 		computed:{
 			styles(){

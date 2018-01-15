@@ -1,9 +1,10 @@
 .ws-lay-head{
-	background-color: $bg-color2;
+	background-color: $bg-color3;
 	display: flex;
 	justify-content:space-between;
 	line-height: 1em;
 	font-size:38px;
+	border-radius: 5px 5px 0 0;
 	.ws-lay-title{
 		padding: 0 1em;
 		@include no-select;
@@ -12,11 +13,26 @@
 	.ws-lay-close{
 		padding: 0 1em;
 		cursor: pointer;
+		text-align: center;
+		i{
+			color: $bg-color8;
+		}
 		&:hover{
-			transform:rotate(360deg);
-			transition:transform 1s;
+			// (会导致某些页面节点字体抖动、模糊 暂时弃用)
+			// transform:rotate(360deg);
+			// transition:transform 1s;
+			i{
+				color:$bg-primary;
+				transition:transform 0.4s;
+			}
 		}
 	}
 
+}
+.ws-lay-body{
+	width: 100%;
+	height: auto;
+	min-height: 120px;
+	padding: 10px;
 }
 

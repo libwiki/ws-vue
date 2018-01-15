@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<i :class="[prefix,icons]" :style="styles"></i>
+		<i :class="[prefix,icons]" :style="styles" @click="click"></i>
 	</div>
 </template>
 <script>
@@ -25,6 +25,11 @@
                 if (this.size)style['font-size'] = `${this.size}px`;
                 if (this.color)style.color = this.color;
                 return style;
+			}
+		},
+		methods:{
+			click(e){
+				this.$emit('click',e)
 			}
 		}
 	}

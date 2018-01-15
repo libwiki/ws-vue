@@ -1,18 +1,20 @@
+import * as Base from './base'
 import Icon from './icon'
 import {Button,BtnGroup} from './button'
 import {Col,Row} from './layout'
 import Modal from './modal'
 import Message from './message'
-import * as Base from './base'
+import MessageBox from './message-box'
+
 
 const components={
+	...Base,
 	Icon,
 	Button,
 	BtnGroup,
 	Row,
 	Col,
-	//Modal,
-	...Base,
+	MsgBox:MessageBox,
 }
 const install=function(vue,options={}){
 	if(install.installed)return;
@@ -20,8 +22,9 @@ const install=function(vue,options={}){
         vue.component(key, components[key])
     })
 
-    vue.prototype.$modal=Modal.Instance()
+    vue.prototype.$modal=Modal
     vue.prototype.$msg=Message.Instance().message
+    vue.prototype.$msgbox=MessageBox.Instance().open
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

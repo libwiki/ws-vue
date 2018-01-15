@@ -14,8 +14,8 @@
 			}
 		},
 		methods:{
-			close(e){
-				this.$emit('close',e)
+			close(){
+				this.$emit('close')
 			}
 		}
 	}

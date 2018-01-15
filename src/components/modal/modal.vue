@@ -1,5 +1,5 @@
 <template>
-	<div :class="prefix" :style="styles" v-show="isShow">
+	<div :class="prefix" :style="styles" v-show="show" @click.self="click">
 		<slot></slot>
 	</div>
 </template>
@@ -7,10 +7,10 @@
 	export default{
 		name:'Modal',
 		props:{
-			opacity:{default:0.1},
+			opacity:{default:0.5},
 			bgColor:{type:String,default:'#000'},
 			zIndex:Number,
-			isShow:{type:Boolean,default:false}
+			show:{type:Boolean,default:false}
 		},
 		data(){
 			return {
@@ -27,6 +27,11 @@
 				return styles;
 			}
 		},
+		methods:{
+			click(){
+				this.$emit('click')
+			}
+		}
 
 	}
 </script>

@@ -5,65 +5,67 @@ Overlayer.Instance=function(options={}){
 	const Instance=new Vue({
 		data:Object.assign(options,{
 			defaultZIndex:20180111,
-			list:[],
+			list:{},
 			isClickClose:true,
-			isShow:false,
+			show:false,
 		}),
 		render(h){
 			let self=this;
 	        return h(Modal,{
 	          props:{
-	            isShow:self.isShow,
-	            zIndex:self.zIndex
+	            show:self.show,
+	            zIndex:self.defaultZIndex
 	          },
-	          nativeOn:{
+	          on:{
 	            click:self.click
 	          }
 	        })
 	    },
 	    computed:{
 	    	zIndex(){
-	    		return this.defaultZIndex+this.list.length+1
+	    		return this.defaultZIndex+Object.keys(this.list).length+1
 	    	}
 	    },
 	    methods:{
-	    	add(instance){
-			    if(instance)this.list.push(instance)
+	    	add(key,instance){
+			    if(instance&&instance)this.list[key]=instance
 			},
-			remove(instance){
+			remove(key){
 			    this.close()
-			    if(!instance||!this.list[instance])return;
-			    // instance=this.list[instance]
-			    this.list=this.list.filter(item=>{
-			      return item!==instance
-			    })
+			    if(!key||!this.list[key])return;
+			    // instance=this.list[key]
 			    // instance.$el.remove()
 			    // instance.$destroy()
+			    this.list[key].close(false)
+			    delete this.list[key]
 			    this.close()
 			},
 			removeAll(){
-			    let self=this,max=self.list.length,count=0;
+			    let self=this,max=Object.keys(self.list).length,count=0;
 			    if(!max)self.close()
-			    self.list.forEach(item=>{
+			    Object.values(self.list).forEach(item=>{
 			      count++;
-			      item.$el.remove()
-			      item.$destroy()
+			      // item.$el.remove()
+			      // item.$destroy()
+			      item.close(false)
 			      if(count===max){
-			        self.list=[]
+			        self.list={}
 			        self.close()
 			      }
 			    })
 			},
-
-			open(){
-				this.isShow=true
+			//开启关闭
+			open(val=true){
+				this.show=val
 			},
+			//仅当不存在弹框时关闭
 			close(){
-				if(!this.list.length)this.isShow=false
+				if(!Object.keys(this.list).length)this.open(false)
 			},
 			click(){
 			    if(this.isClickClose){
-			      	this.remove(this.list[this.list.length-1])
+			    	let keys=Object.keys(this.list)
+			      	this.remove(keys[keys.length-1])
 			    }
 			},
 	    }
@@ -77,4 +79,4 @@ Overlayer.Instance=function(options={}){
     return Instance
 }
 
-export default Overlayer
+export default Overlayer.Instance()
