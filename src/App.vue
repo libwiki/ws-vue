@@ -1,0 +1,91 @@
+<template>
+  <div id="app">
+    <Button value="primary" @click="btnClick"></Button>
+    <Button type="default" value="default" icon="pifuzhuti"></Button>
+    <Button type="info" value="info"></Button>
+    <Button type="warm" value="暖色warm" icon="pifuzhuti"></Button>
+    <Button type="danger" value="danger"></Button>
+    <Button value="primary" size="lg"></Button>
+    <Button value="" size="sm" icon="yonghu"></Button>
+    <Button value="primary" size="xs"></Button>    
+
+    <p style="padding-top:20px;">
+      <BtnGroup>
+        <Button value="primary" @click="btnClick"></Button>
+        <Button type="default" value="default" icon="pifuzhuti"></Button>
+        <Button type="info" value="info"></Button>
+        <Button type="warm" value="暖色warm" icon="pifuzhuti"></Button>
+        <Button type="danger" value="danger"></Button>
+      </BtnGroup>
+    </p>
+    <p style="padding-top:20px;">
+      <BtnGroup>
+        <Button type="default" size="xs" value="default" @click="btnClick"></Button>
+        <Button type="default" size="xs" value="default" icon="pifuzhuti"></Button>
+        <Button type="default" size="xs" value="info"></Button>
+        <Button type="default" size="xs" value="暖色warm" icon="pifuzhuti"></Button>
+        <Button type="default" size="xs" value="danger"></Button>
+      </BtnGroup>
+    </p>
+    <p style="padding-top:20px;">
+      <BtnGroup>
+        <Button type="default" size="lg" value="default" @click="btnClick"></Button>
+        <Button type="default" size="lg" value="default" icon="pifuzhuti"></Button>
+        <Button type="default" size="lg" value="info"></Button>
+        <Button type="default" size="lg" value="暖色warm" icon="pifuzhuti"></Button>
+        <Button type="default" size="lg" value="danger"></Button>
+      </BtnGroup>
+    </p>
+    <Icon icon="manyi" size="100" color="#f40"/>
+    <Row>
+      <Col :span="{lg:23,md:12,sm:6,xs:12}" :offset="['lg1','md2','sm3','xs4']" style="background:#ccc">aaaa</Col>
+      <Col>bbbbb</Col>
+      <Col>ccccc</Col>
+      <Col>ddddd</Col>
+      <Col>eeeee</Col>
+      <Col>fffff</Col>
+    </Row>
+    <div class="ws-table">
+      <div class="ws-table-tr">
+        <div class="ws-table-td">td</div>
+        <div class="ws-table-td">td</div>
+        <div class="ws-table-td">td</div>
+        <div class="ws-table-td">td</div>
+      </div>
+    </div>
+    <lay-head></lay-head>
+
+
+  </div>
+</template>
+
+<script>
+import Icon from './components/icon'
+export default {
+  name: 'app',
+  created(){
+    //this.$modal.open()
+    this.$msg('这是提示信息1')
+    this.$msg('这是提示信息2')
+    this.$msg('这是提示信息3')
+    this.$msg('这是提示信息4')
+  },
+  methods:{
+    btnClick(e){
+      console.log(e);
+    },
+  },
+}
+</script>
+
+<style>
+#app {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
+}
+
+</style>

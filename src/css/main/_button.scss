@@ -1,0 +1,46 @@
+.ws-btn{
+	display: inline-flex;
+	color: #fff;
+	cursor: pointer;
+	border-radius: 2px;
+	font-weight: bold;
+	background-color: $bg-primary;
+	border:solid 1px $bg-primary;
+	@include no-select
+	@include m-x5;
+	@include btn-default;
+	&:hover{opacity: 0.8;transition:opacity 0.2s;}
+	span{padding-left: 4px;}
+	span,.ws-icon{color: #fff;}
+}
+
+.ws-btn-default{
+	background-color: #fff;border-color:$bg-color6; color: $bg-color9;
+	span,.ws-icon{color: $bg-color9;}
+}
+.ws-btn-success{background-color: $bg-success;border-color:$bg-success;}
+.ws-btn-info{background-color: $bg-info;border-color:$bg-info;}
+.ws-btn-warm{background-color: $bg-warm;border-color:$bg-warm;}
+.ws-btn-danger{background-color: $bg-danger;border-color:$bg-danger;}
+
+.ws-btn-lg{@include btn-lg;}
+.ws-btn-sm{@include btn-sm;font-weight: normal;}
+.ws-btn-xs{@include btn-xs;font-weight: normal;font-size: 12px;}
+
+.ws-btn-default:hover{
+	border-color:$bg-primary;color: $bg-primary;
+	span,.ws-icon{color: $bg-primary;}
+}
+
+.ws-btn-group{display: inline-flex;}
+.ws-btn-group .ws-btn{
+	margin: 0px;
+	border-radius: 0px;
+	border-right-width: 0px;
+	&:first-child{border-radius: 5px 0 0 5px;}
+	&:last-child{border-right-width: 1px;border-radius: 0 5px 5px 0;}
+	&:hover{
+		border-width: 1px;
+		&+.ws-btn{border-left-width:0px;}
+	}
+}

@@ -1,0 +1,22 @@
+.ws-lay-head{
+	background-color: $bg-color2;
+	display: flex;
+	justify-content:space-between;
+	line-height: 1em;
+	font-size:38px;
+	.ws-lay-title{
+		padding: 0 1em;
+		@include no-select;
+		cursor: default;
+	}
+	.ws-lay-close{
+		padding: 0 1em;
+		cursor: pointer;
+		&:hover{
+			transform:rotate(360deg);
+			transition:transform 1s;
+		}
+	}
+
+}
+

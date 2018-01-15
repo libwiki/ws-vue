@@ -1,0 +1,14 @@
+@charset "utf-8";
+.ws-table{
+	width: 100%;
+	box-sizing:border-box;
+	display: table;
+	border-collapse: collapse;
+}
+.ws-table-tr{
+	display: table-row;
+}
+.ws-table-td{
+	display: table-cell;
+	border: 1px solid $bg-color5;
+}

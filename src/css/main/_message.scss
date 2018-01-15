@@ -1,0 +1,11 @@
+.ws-message{
+	background-color: rgba(0,0,0,1);
+	line-height: $line-height;
+	color: #fff;
+	padding: 15px 40px;
+	border-radius: 4px;
+	font-size: $font-size;
+	cursor: default;
+	@include no-select;
+	@include position-center
+}
