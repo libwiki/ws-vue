@@ -79,4 +79,4 @@ Overlayer.Instance=function(options={}){
     return Instance
 }
 
-export default Overlayer.Instance()
+export default Overlayer//.Instance()
