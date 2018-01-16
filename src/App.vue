@@ -53,8 +53,7 @@
         <div class="ws-table-td">td</div>
       </div>
     </div>
-    <!-- <msg-box :show="true" content="这是内容"></msg-box> -->
-    <!-- <msg-box :show="show" @close="close">
+    <!-- <msg-box :show="true" :modal="true" @close="close">
       <p>
         <h1>这是内容2</h1>
         <h2>这是内容2</h2>
@@ -62,9 +61,6 @@
         <h4>这是内容2</h4>
       </p>
     </msg-box> -->
-    <Test></Test>
-    <Test></Test>
-    <Test></Test>
   </div>
 </template>
 
@@ -72,13 +68,27 @@
 export default {
   name: 'app',
   created(){
+    let options={
+      content:'这是提示信息0000',
+      title:'标题标题121231',
+      show:true,
+      modal:true
+    }
     //this.$msg('这是提示信息1')
-    //this.$msgbox('这是提示信息0000','标题',true)
-    this.$Test.open()
+    //this.$msgbox.open(options)
+    //this.$modal.open()
   },
   data(){
     return {
-      show:true
+      show:true,
+      a:{},
+      btnList:[
+        {
+          value:'确定',
+          type:'info',
+          callback:this.callback
+        }
+      ],
     }
   },
   methods:{

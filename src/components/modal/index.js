@@ -30,14 +30,13 @@ Overlayer.Instance=function(options={}){
 	    	add(key,instance){
 			    if(instance&&instance)this.list[key]=instance
 			},
-			remove(key){
-			    this.close()
-			    if(!key||!this.list[key])return;
-			    // instance=this.list[key]
-			    // instance.$el.remove()
-			    // instance.$destroy()
-			    this.list[key].close(false)
-			    delete this.list[key]
+			remove(key,type=true){
+			    if(!key||!this.list[key]){
+			    	this.close();
+			    	return;
+			    }
+			    if(type)this.list[key].close();
+			    delete this.list[key];
 			    this.close()
 			},
 			removeAll(){
@@ -79,4 +78,4 @@ Overlayer.Instance=function(options={}){
     return Instance
 }
 
-export default Overlayer//.Instance()
+export default Overlayer.Instance()

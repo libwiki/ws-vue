@@ -12,11 +12,12 @@ textarea,input,button{outline: none;border-width: 0px;}
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
 }
+@mixin no-wrap{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 @mixin no-select{user-select:none;}
 @mixin m-x5{margin-left: 5px;margin-right: 5px;}
 @mixin position-center{position: absolute;left: 50%;top: 50%; transform: translate(-50%,-50%);}
 
 @mixin btn-lg{padding-left: 25px;padding-right: 25px;line-height: 43px;}
-@mixin btn-default{padding-left: 20px;padding-right: 20px;line-height: 38px;}
+@mixin btn-default{padding-left: 20px;padding-right: 20px;line-height: 37px;}
 @mixin btn-sm{padding-left: 13px;padding-right: 13px;line-height: 30px;}
 @mixin btn-xs{padding-left: 6px;padding-right: 6px;line-height: 22px;}

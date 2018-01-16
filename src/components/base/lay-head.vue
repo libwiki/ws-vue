@@ -1,5 +1,5 @@
 <template>
-	<div :class="prefix">
+	<div :class="prefix" @mousedown="mousedown">
 		<p class="ws-lay-title"><slot>标题</slot></p>
 		<Icon icon="cuowuguanbiquxiao" class="ws-lay-close" @click="close"></Icon>
 	</div>
@@ -16,7 +16,11 @@
 		methods:{
 			close(e){
 				this.$emit('close',e)
-			}
+			},
+			mousedown(e){
+				if(e.target.tagName==='I')return;
+				this.$emit('mousedown',e)
+			},
 		}
 	}
 </script>

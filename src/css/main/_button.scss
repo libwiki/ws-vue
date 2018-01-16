@@ -9,7 +9,8 @@
 	@include no-select
 	@include m-x5;
 	@include btn-default;
-	&:hover{opacity: 0.8;transition:opacity 0.2s;}
+	&:hover{opacity: 0.8;transition:opacity 0.2s translateZ(0);}
+	&:active{opacity: 1;transition:opacity 0.4s translateZ(0);}
 	span{padding-left: 4px;}
 	span,.ws-icon{color: #fff;}
 }

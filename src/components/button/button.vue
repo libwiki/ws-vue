@@ -1,7 +1,7 @@
 <template>
 	<div :class="classs" :disabled="disabled" @click="callClick">
 		<Icon v-if="icon" :icon="icon"></Icon>
-		<span v-if="value">{{value}}</span>
+		<span><slot>{{value}}</slot></span>
 	</div>
 </template>
 <script>

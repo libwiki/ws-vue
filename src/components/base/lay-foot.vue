@@ -1,21 +1,34 @@
 <template>
 	<div :class="prefix">
-		<p class="ws-lay-title"><slot>标题</slot></p>
-		<Icon icon="cuowuguanbiquxiao" class="ws-lay-close" @click="close"></Icon>
+		<slot>
+			<Button v-for="item of btnList" :type="item.type" @click="item.callback">{{item.value}}</Button>
+		</slot>
 	</div>
 </template>
 <script>
-	import Icon from '../icon'
+	import Button from '../button'
 	export default{
 		name:'LayHead',
+		props:{
+			btnList:{
+				type:Array,
+				default:function(){
+					return [];
+				}
+			},
+		},
 		data(){
 			return {
-				prefix:'ws-lay-head',
+				prefix:'ws-lay-foot',
+				
 			}
 		},
 		methods:{
 			close(){
 				this.$emit('close')
+			},
+			callback(){
+				console.log('callback')
 			}
 		}
 	}
