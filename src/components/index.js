@@ -5,6 +5,7 @@ import {Col,Row} from './layout'
 import Modal from './modal'
 import Message from './message'
 import MessageBox from './message-box'
+import Tag from './tag'
 
 const components={
 	...Base,
@@ -13,7 +14,7 @@ const components={
 	BtnGroup,
 	Row,
 	Col,
-	MsgBox:MessageBox,
+	Tag,
 }
 const install=function(Vue,options={}){
 	if(install.installed)return;
@@ -21,11 +22,12 @@ const install=function(Vue,options={}){
         Vue.component(key, components[key])
     })
 
-    Vue.prototype.$modal=Modal
-    //Vue.prototype.$msg=Message.Instance().message
-    //Vue.prototype.$msgbox=MessageBox.Instance().open
     
-    Vue.prototype.$msgbox=MessageBox.Instance(Vue)
+    
+    Vue.prototype.$modal=Modal.Instance(Vue)
+    Vue.prototype.$msg=Message.Instance(Vue).message
+    Vue.prototype.$msgbox=MessageBox.Instance(Vue).open
+
 }
 
 if (typeof window !== 'undefined' && window.Vue) {

@@ -1,17 +1,14 @@
-import Vue from 'vue'
-import Modal from '../modal'
 import Message from './message'
-Message.Instance=function(options={}){
+Message.Instance=function(Vue){
 	const Instance=new Vue({
-		data:Object.assign(options,{
+		data:{
 			opacity:0.75,
 			show:false,
 			autoClose:true,
 			continueTime:1800,
 			timer:null,
 			message:'',
-			zIndex:Modal.zIndex,
-		}),
+		},
 		render(h){
 			return h(Message,{
 				props:{
@@ -19,17 +16,15 @@ Message.Instance=function(options={}){
 					show:this.show,
 					opacity:this.opacity,
 				},
-				style:{
-					'z-index':this.zIndex+20180115,
-				},
 			})
 		},
 		
 		methods:{
-			setMsg(msg,continueTime){
-				if(!msg)return;
-				this.message=msg
-				if(continueTime)this.continueTime=continueTime;
+			setMsg(message,continueTime=null,opacity=null){
+				if(!message)return;
+				this.message=message
+				if(continueTime!==null)this.continueTime=continueTime;
+				if(opacity!==null)this.opacity=opacity;
 				if(this.timer!==null){
 					clearTimeout(this.timer)
 					this.timer=null
@@ -50,9 +45,9 @@ Message.Instance=function(options={}){
 	})
 	document.body.appendChild(Instance.$mount().$el)
 	return {
-		message(msg,continueTime){
-			if(!msg)return;
-			Instance.setMsg(msg,continueTime)
+		message(message,continueTime){
+			if(!message)return;
+			Instance.setMsg(message,continueTime)
 			Instance.open()
 		},
 	}

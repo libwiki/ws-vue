@@ -1,7 +1,7 @@
 <template>
 	<div :class="prefix">
 		<slot>
-			<Button v-for="item of btnList" :type="item.type" @click="item.callback">{{item.value}}</Button>
+			<Button v-for="(item,key) of btnList" :type="item.type" @click="item.callback" :key="key" :item="item.item">{{item.value}}</Button>
 		</slot>
 	</div>
 </template>
@@ -23,13 +23,5 @@
 				
 			}
 		},
-		methods:{
-			close(){
-				this.$emit('close')
-			},
-			callback(){
-				console.log('callback')
-			}
-		}
 	}
 </script>

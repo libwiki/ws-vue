@@ -13,13 +13,14 @@
 		},
 		computed:{
 			styles(){
-				let styles={opacity:this.opacity}
+				let styles={opacity:this.opacity,'z-index':this.zIndex,}
 				return styles
 			}
 		},
 		data(){
 			return {
 				prefix:'ws-message',
+				zIndex:this.$modal.zIndex+20180115
 			}
 		},
 		

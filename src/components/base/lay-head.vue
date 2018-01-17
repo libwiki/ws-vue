@@ -1,5 +1,5 @@
 <template>
-	<div :class="prefix" @mousedown="mousedown">
+	<div :class="prefix" @mousedown="mousedown" ondragstart="return false;" :data-drag="true">
 		<p class="ws-lay-title"><slot>标题</slot></p>
 		<Icon icon="cuowuguanbiquxiao" class="ws-lay-close" @click="close"></Icon>
 	</div>

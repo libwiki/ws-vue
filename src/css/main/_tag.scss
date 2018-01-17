@@ -1,0 +1,66 @@
+.ws-tag{
+	border:solid 1px $bg-color5;
+	background-color: $bg-color;
+	border-radius: 2px;
+	cursor: default;
+	display: inline-flex;
+	justify-content:space-between;
+	color: $bg-success;
+	@include no-select;
+	@include tag-sm;
+	&:hover{opacity: 0.8;transition:opacity 0.2s translateZ(0);}
+	.ws-tag-close{
+		margin-left: 5px;
+		cursor: pointer;
+		i{
+			color: $bg-color8;
+		}
+	}
+	&.ws-tag-multi:hover,&.ws-tag-checked{
+		background-color: $bg-success;
+		color:#fff;
+		border-color: $bg-success;
+		i{
+			color: #fff;
+		}
+	}
+	.ws-tag-close i:hover{
+		background-color:$bg-warm;
+		color: #fff;
+		border-radius: 50%;
+	}
+}
+.ws-tag-lg{@include tag-lg;font-weight: bolder;}
+.ws-tag-xs{@include tag-xs;font-size: 12px;}
+
+.ws-tag-primary{
+	color: $bg-primary;
+	&.ws-tag-multi:hover,&.ws-tag-checked{
+		background-color: $bg-primary;
+		border-color: $bg-primary;
+	}
+}
+.ws-tag-info{
+	color: $bg-info;
+	&.ws-tag-multi:hover,&.ws-tag-checked{
+		background-color: $bg-info;
+		border-color: $bg-info;
+	}
+}
+.ws-tag-warm{
+	color: $bg-warm;
+	&.ws-tag-multi:hover,&.ws-tag-checked{
+		background-color: $bg-warm;
+		border-color: $bg-warm;
+	}
+	.ws-tag-close i:hover{
+		background-color:$bg-danger;
+	}
+}
+.ws-tag-danger{
+	color: $bg-danger;
+	&.ws-tag-multi:hover,&.ws-tag-checked{
+		background-color: $bg-danger;
+		border-color: $bg-danger;
+	}
+}

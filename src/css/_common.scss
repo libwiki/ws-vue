@@ -21,3 +21,7 @@ textarea,input,button{outline: none;border-width: 0px;}
 @mixin btn-default{padding-left: 20px;padding-right: 20px;line-height: 37px;}
 @mixin btn-sm{padding-left: 13px;padding-right: 13px;line-height: 30px;}
 @mixin btn-xs{padding-left: 6px;padding-right: 6px;line-height: 22px;}
+
+@mixin tag-lg{padding: 10px 15px;}
+@mixin tag-sm{padding: 5px 10px;}
+@mixin tag-xs{padding: 3px 8px;}

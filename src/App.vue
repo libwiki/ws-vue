@@ -53,14 +53,10 @@
         <div class="ws-table-td">td</div>
       </div>
     </div>
-    <!-- <msg-box :show="true" :modal="true" @close="close">
-      <p>
-        <h1>这是内容2</h1>
-        <h2>这是内容2</h2>
-        <h3>这是内容2</h3>
-        <h4>这是内容2</h4>
-      </p>
-    </msg-box> -->
+    <p style="height:30px;"></p>
+    <Tag :checked="true">aaa</Tag>
+    <Tag type="primary" hoverType="multi">这是标签</Tag>
+    <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00">这是Warm标签</Tag>
   </div>
 </template>
 
@@ -72,11 +68,11 @@ export default {
       content:'这是提示信息0000',
       title:'标题标题121231',
       show:true,
-      modal:true
+      modal:true,
+      btnList:this.btnList
     }
-    //this.$msg('这是提示信息1')
-    //this.$msgbox.open(options)
-    //this.$modal.open()
+    // this.$msg('这是提示信息1')
+    //this.$msgbox(options)
   },
   data(){
     return {
@@ -84,16 +80,24 @@ export default {
       a:{},
       btnList:[
         {
+          item:111111111111,
+          value:'取消',
+          type:'info',
+          callback:this.btnClick
+        },
+        {
+          item:'222222222222222222222222222222222222',
           value:'确定',
           type:'info',
-          callback:this.callback
-        }
+          callback:this.btnClick
+        },
+
       ],
     }
   },
   methods:{
-    btnClick(e){
-      console.log(e);
+    btnClick(e,item){
+      console.log(e,item);
     },
     close(e){
       this.show=false;

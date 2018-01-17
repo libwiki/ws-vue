@@ -19,6 +19,7 @@
 			size:[String,Number],
 			disabled:Boolean,
 			icon:String,
+			item:[String,Number],//按钮标识 如果是整型 最大为16位
 		},
 		computed:{
 			classs(){
@@ -30,7 +31,7 @@
 		},
 		methods:{
 			callClick(e){
-				this.$emit('click',e);
+				this.$emit('click',e,this.item);
 			}
 		}
 	}

@@ -1,13 +1,11 @@
 import MessageBox from './message-box'
-import Modal from '../modal'
 MessageBox.Instance=Vue=>{
-	const MessageBoxs=Vue.extend(MessageBox)
 	const Instance=new Vue({
 		data:{
 			propsData:{}
 		},
 		render(h){
-			return h(MessageBoxs,{
+			return h(MessageBox,{
 				props:Object.assign(this.propsData,{
 
 				}),
@@ -17,13 +15,15 @@ MessageBox.Instance=Vue=>{
 				
 			})
 		},
-		
 		methods:{
 			open(options={}){
 				this.propsData=options;
+				this.$modal.add(MessageBox.name,this)
+				this.$modal.open(this.propsData.modal&&this.propsData.show)
 			},
 			close(){
 				this.propsData.show=false;
+				this.$modal.remove(MessageBox.name,false);
 			},
 		}
 	})

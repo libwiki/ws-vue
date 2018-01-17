@@ -1,14 +1,12 @@
-import Vue from 'vue'
-import Overlayer  from './modal'  
-Overlayer.Instance=function(options={}){
-	const Modal=Vue.extend(Overlayer)
+import Modal  from './modal'  
+Modal.Instance=function(Vue){
 	const Instance=new Vue({
-		data:Object.assign(options,{
+		data:{
 			defaultZIndex:20180111,
 			list:{},
 			isClickClose:true,
 			show:false,
-		}),
+		},
 		render(h){
 			let self=this;
 	        return h(Modal,{
@@ -46,7 +44,7 @@ Overlayer.Instance=function(options={}){
 			      count++;
 			      // item.$el.remove()
 			      // item.$destroy()
-			      item.close(false)
+			      item.close()
 			      if(count===max){
 			        self.list={}
 			        self.close()
@@ -72,10 +70,10 @@ Overlayer.Instance=function(options={}){
     document.body.appendChild(Instance.$mount().$el);
     window.addEventListener('keydown',function(e){
 	  if(e.keyCode===27){
-	    Instance.remove()
+	    Instance.removeAll()
 	  }
 	})
     return Instance
 }
 
-export default Overlayer.Instance()
+export default Modal
