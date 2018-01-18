@@ -8,13 +8,16 @@
     <Button value="primary" size="lg"></Button>
     <Button value="" size="sm" icon="yonghu"></Button>
     <Button value="primary" size="xs"></Button>    
-
+    
+    
     <p style="padding-top:20px;">
       <BtnGroup>
         <Button value="primary" @click="btnClick"></Button>
         <Button type="default" value="default" icon="pifuzhuti"></Button>
         <Button type="info" value="info"></Button>
+        <transition name="bouncelInLeft">
         <Button type="warm" value="暖色warm" icon="pifuzhuti"></Button>
+        </transition>
         <Button type="danger" value="danger"></Button>
       </BtnGroup>
     </p>
@@ -27,6 +30,7 @@
         <Button type="default" size="xs" value="danger"></Button>
       </BtnGroup>
     </p>
+    
     <p style="padding-top:20px;">
       <BtnGroup>
         <Button type="default" size="lg" value="default" @click="btnClick"></Button>
@@ -58,12 +62,21 @@
       <Tag :checkable="true" :editable="true" v-model="val"></Tag>
       <Tag type="primary" hoverType="multi" value="这是标签" :closable="true"></Tag>
       <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" value="这是Warm标签"></Tag>
+      <Button type="default" size="xs" @click="show = !show">Toggle render</Button>
     </p>
-    <!-- <p style="background:#eee">
-      <span class="ws-tag" style="border:solid 1px #aaa;"><span>123</span></span>
-      <span  class="ws-tag" style="border:solid #aaa 1px;"><span style=" min-height:25px; min-width:20px;"></span> </span>
-      <span  class="ws-tag" style="border:solid #aaa 1px;"><span ></span></span>
-    </p> -->
+    <div id="example-3">
+  
+  <p style="padding-top:30px;">
+
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animated tada"
+      leave-active-class="animated bounceOutRight"
+    >
+      <Button type="warm" value="暖色warm" icon="pifuzhuti" v-show="show"></Button>
+    </transition>
+  </p>
+</div>
   </div>
 </template>
 
