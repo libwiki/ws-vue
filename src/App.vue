@@ -53,10 +53,17 @@
         <div class="ws-table-td">td</div>
       </div>
     </div>
-    <p style="height:30px;"></p>
-    <Tag :checked="true">aaa</Tag>
-    <Tag type="primary" hoverType="multi">这是标签</Tag>
-    <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00">这是Warm标签</Tag>
+    <p style="padding-top:30px;">val:{{val}}
+    <p style="padding-top:30px;">
+      <Tag :checkable="true" :editable="true" v-model="val"></Tag>
+      <Tag type="primary" hoverType="multi" value="这是标签" :closable="true"></Tag>
+      <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" value="这是Warm标签"></Tag>
+    </p>
+    <!-- <p style="background:#eee">
+      <span class="ws-tag" style="border:solid 1px #aaa;"><span>123</span></span>
+      <span  class="ws-tag" style="border:solid #aaa 1px;"><span style=" min-height:25px; min-width:20px;"></span> </span>
+      <span  class="ws-tag" style="border:solid #aaa 1px;"><span ></span></span>
+    </p> -->
   </div>
 </template>
 
@@ -78,6 +85,7 @@ export default {
     return {
       show:true,
       a:{},
+      val:'aaaa',
       btnList:[
         {
           item:111111111111,

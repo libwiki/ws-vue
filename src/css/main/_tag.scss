@@ -3,22 +3,40 @@
 	background-color: $bg-color;
 	border-radius: 2px;
 	cursor: default;
-	display: inline-flex;
-	justify-content:space-between;
-	color: $bg-success;
-	@include no-select;
-	@include tag-sm;
+	display: inline-block;
+	&::after {  
+	    content: "";  
+	    display: inline-block;  
+	    clear: both;  
+	}
+	//display: inline-flex;
+	//justify-content:space-between;
+	.ws-tag-content{
+		//outline: none;
+		float: left;
+		//display: inline-block;
+		color: $bg-success;
+		min-width: 1px;
+		min-height: 1px;
+		@include tag-sm;
+		@include no-select;
+	}
+	
 	&:hover{opacity: 0.8;transition:opacity 0.2s translateZ(0);}
 	.ws-tag-close{
-		margin-left: 5px;
+		float: left;
+		line-height: 25px;
 		cursor: pointer;
+		margin-top: 1px;
 		i{
 			color: $bg-color8;
 		}
 	}
 	&.ws-tag-multi:hover,&.ws-tag-checked{
 		background-color: $bg-success;
-		color:#fff;
+		span.ws-tag-content{
+			color:#fff;
+		}
 		border-color: $bg-success;
 		i{
 			color: #fff;
@@ -30,25 +48,49 @@
 		border-radius: 50%;
 	}
 }
-.ws-tag-lg{@include tag-lg;font-weight: bolder;}
-.ws-tag-xs{@include tag-xs;font-size: 12px;}
+.ws-tag-lg{
+	.ws-tag-content{
+		font-weight: bolder;
+		@include tag-lg;
+	}
+	.ws-tag-close{
+		margin-top: 3px;
+		line-height: 30px;
+	}
+}
+.ws-tag-xs{
+	.ws-tag-content{
+		font-size: 12px;
+		@include tag-xs;
+	}
+	.ws-tag-close{
+		margin-top: 2px;
+		line-height: 15px;
+	}
+}
 
 .ws-tag-primary{
-	color: $bg-primary;
+	.ws-tag-content{
+		color: $bg-primary;
+	}
 	&.ws-tag-multi:hover,&.ws-tag-checked{
 		background-color: $bg-primary;
 		border-color: $bg-primary;
 	}
 }
 .ws-tag-info{
-	color: $bg-info;
+	.ws-tag-content{
+		color: $bg-info;
+	}
 	&.ws-tag-multi:hover,&.ws-tag-checked{
 		background-color: $bg-info;
 		border-color: $bg-info;
 	}
 }
 .ws-tag-warm{
-	color: $bg-warm;
+	.ws-tag-content{
+		color: $bg-warm;
+	}
 	&.ws-tag-multi:hover,&.ws-tag-checked{
 		background-color: $bg-warm;
 		border-color: $bg-warm;
@@ -58,7 +100,9 @@
 	}
 }
 .ws-tag-danger{
-	color: $bg-danger;
+	.ws-tag-content{
+		color: $bg-danger;
+	}
 	&.ws-tag-multi:hover,&.ws-tag-checked{
 		background-color: $bg-danger;
 		border-color: $bg-danger;
