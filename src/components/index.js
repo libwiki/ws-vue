@@ -6,6 +6,7 @@ import Modal from './modal'
 import Message from './message'
 import MessageBox from './message-box'
 import Tag from './tag'
+import Carousel from './carousel'
 
 const components={
 	...Base,
@@ -15,6 +16,7 @@ const components={
 	Row,
 	Col,
 	Tag,
+	Carousel,
 }
 const install=function(Vue,options={}){
 	if(install.installed)return;

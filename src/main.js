@@ -6,6 +6,9 @@ import router from './router'
 import wsvue from './components'
 import './css/index'
 
+//https://daneden.github.io/animate.css/
+import 'animate.css'
+
 Vue.use(wsvue);
 
 Vue.config.productionTip = true

@@ -87,7 +87,6 @@
                 	length++;
                 }
                 let rs=length>defaultLength?length-defaultLength:1;
-                console.log(rs)
                 return rs;
 			},
 			//点击关闭按钮

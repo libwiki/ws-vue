@@ -1,0 +1,35 @@
+.ws-carousel{
+	position: relative;
+	width: 100%;
+	height: auto;
+
+	.ws-carousel-main{
+		background-color: $bg-success;
+		width: 100%;
+		height: auto;
+		border-radius: 2px;
+		position: absolute;
+	}
+	.ws-carousel-prev,.ws-carousel-next{
+		background-color: rgba(0,0,0,0.2);
+		color: #fff;
+		position: absolute;
+		cursor: pointer;
+		top: 50%;
+		transform:translate(0,-50%);
+		//border-radius: 1px;
+		border-radius:50%;
+
+	}
+	.ws-carousel-prev:hover,.ws-carousel-next:hover{
+		background-color: rgba(0,0,0,0.4);
+		transition:background-color 0.3s;
+	}
+	.ws-carousel-prev{
+		left: 30px;
+	}
+	.ws-carousel-next{
+		right: 30px;
+	}
+
+}

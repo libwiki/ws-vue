@@ -1,6 +1,7 @@
 *{box-sizing:border-box; color: $default-color;font-family: $font-family;font-smoothing: antialiased;}
 html,body,h1,h2,h3,h4,h5,h6,p,ul,li,table,span{margin: 0px;padding: 0px;}
 a,p,span,li,input,select,option,textarea,button,div,label,body,td{font-size: $font-size;}
+body{overflow-x:hidden}//animate bug 会出现横向滚动条
 li{list-style-type: none;}
 a{text-decoration: none;}
 img{border-width:0px; }

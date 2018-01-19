@@ -1,7 +1,5 @@
 <template>
-	<div>
-		<i :class="[prefix,icons]" :style="styles" @click="click"></i>
-	</div>
+	<i :class="[prefix,icons]" :style="styles" @click="click"></i>
 </template>
 <script>
 	export default{

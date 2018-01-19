@@ -5,7 +5,7 @@ Message.Instance=function(Vue){
 			opacity:0.75,
 			show:false,
 			autoClose:true,
-			continueTime:1800,
+			duration:1800,
 			timer:null,
 			message:'',
 		},
@@ -20,10 +20,10 @@ Message.Instance=function(Vue){
 		},
 		
 		methods:{
-			setMsg(message,continueTime=null,opacity=null){
+			setMsg(message,duration=null,opacity=null){
 				if(!message)return;
 				this.message=message
-				if(continueTime!==null)this.continueTime=continueTime;
+				if(duration!==null)this.duration=duration;
 				if(opacity!==null)this.opacity=opacity;
 				if(this.timer!==null){
 					clearTimeout(this.timer)
@@ -37,7 +37,7 @@ Message.Instance=function(Vue){
 			close(){
 				this.timer=setTimeout(_=>{
 					this.show=false
-				},this.continueTime)
+				},this.duration)
 			}
 
 		},
@@ -45,9 +45,9 @@ Message.Instance=function(Vue){
 	})
 	document.body.appendChild(Instance.$mount().$el)
 	return {
-		message(message,continueTime){
+		message(message,duration){
 			if(!message)return;
-			Instance.setMsg(message,continueTime)
+			Instance.setMsg(message,duration)
 			Instance.open()
 		},
 	}

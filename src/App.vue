@@ -32,7 +32,7 @@
     </p>
     
     <p style="padding-top:20px;">
-      <BtnGroup>
+      <BtnGroup >
         <Button type="default" size="lg" value="default" @click="btnClick"></Button>
         <Button type="default" size="lg" value="default" icon="pifuzhuti"></Button>
         <Button type="default" size="lg" value="info"></Button>
@@ -40,7 +40,7 @@
         <Button type="default" size="lg" value="danger"></Button>
       </BtnGroup>
     </p>
-    <Icon icon="manyi" size="100" color="#f40"/>
+    <Icon icon="manyi" size="100" color="#f40" style="background:#eee;border-radius: 50%;"/>
     <Row>
       <Col :span="{lg:23,md:12,sm:6,xs:12}" :offset="['lg1','md2','sm3','xs4']" style="background:#ccc">aaaa</Col>
       <Col>bbbbb</Col>
@@ -59,22 +59,26 @@
     </div>
     <p style="padding-top:30px;">val:{{val}}
     <p style="padding-top:30px;">
-      <Tag :checkable="true" :editable="true" v-model="val"></Tag>
+      <Tag :checkable="true" :editable="true" v-model="val" :closable="true"></Tag>
       <Tag type="primary" hoverType="multi" value="这是标签" :closable="true"></Tag>
-      <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" value="这是Warm标签"></Tag>
-      <Button type="default" size="xs" @click="show = !show">Toggle render</Button>
+      <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" value="这是Warm标签" :closable="true"></Tag>
+      <Button type="default" size="xs" @click="show = !show">点击查看动画</Button>
     </p>
     <div id="example-3">
   
   <p style="padding-top:30px;">
 
-    <transition
-      name="custom-classes-transition"
-      enter-active-class="animated tada"
-      leave-active-class="animated bounceOutRight"
+    <Animates
+      in="fadeInRightBig"
+      out="bounceOutLeft"
+      :group="true"
     >
-      <Button type="warm" value="暖色warm" icon="pifuzhuti" v-show="show"></Button>
-    </transition>
+      <Button type="warm" value="暖色warm" icon="pifuzhuti" v-show="show" key="button"></Button>
+      <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" v-show="!show" value="这是Warm标签" key="tag"></Tag>
+    </Animates>
+  </p>
+  <p style="padding-top:30px;margin-left:20%;padding-bottom:30px; width:50%;height:300px;">
+    <Carousel :list="list" height="300px" width="80%"></Carousel>
   </p>
 </div>
   </div>
@@ -99,6 +103,16 @@ export default {
       show:true,
       a:{},
       val:'aaaa',
+      list:[
+        {
+          id:1,
+          bgColor:'#19be6b',
+        },
+        {
+          id:2,
+          bgColor:'#ff9900',
+        },
+      ],
       btnList:[
         {
           item:111111111111,
