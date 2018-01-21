@@ -62,23 +62,30 @@
       <Tag :checkable="true" :editable="true" v-model="val" :closable="true"></Tag>
       <Tag type="primary" hoverType="multi" value="这是标签" :closable="true"></Tag>
       <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" value="这是Warm标签" :closable="true"></Tag>
-      <Button type="default" size="xs" @click="show = !show">点击查看动画</Button>
+      <Button type="default" size="xs" @click="hover">点击查看动画</Button>
     </p>
     <div id="example-3">
   
   <p style="padding-top:30px;">
 
-    <Animates
+    <!-- <Animates
       in="fadeInRightBig"
       out="bounceOutLeft"
       :group="true"
     >
       <Button type="warm" value="暖色warm" icon="pifuzhuti" v-show="show" key="button"></Button>
       <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" v-show="!show" value="这是Warm标签" key="tag"></Tag>
-    </Animates>
+    </Animates> -->
+    <!-- <h1 v-show="show" :class="classs">123123123123123</h1> -->
   </p>
   <p style="padding-top:30px;margin-left:20%;padding-bottom:30px; width:50%;height:300px;">
-    <Carousel :list="list" height="300px" width="80%"></Carousel>
+    <Carousel>
+      <carousel-item v-for="(item,i) of list" :key="i" :bgColor="item.bgColor">
+        <div style="height:300px;">
+          aa
+        </div>
+      </carousel-item>
+    </Carousel>
   </p>
 </div>
   </div>
@@ -93,16 +100,32 @@ export default {
       title:'标题标题121231',
       show:true,
       modal:true,
-      btnList:this.btnList
+      btnList:this.btnList,
+      
     }
     // this.$msg('这是提示信息1')
     //this.$msgbox(options)
+  },
+  computed:{
+    classs(){
+      return ['animated',this.in];
+    }
+  },
+  watch:{
+    show(val){
+      if(val){
+        this.in='fadeInRightBig';
+      }else{
+        this.in='bounceOutLeft';
+      }
+    }
   },
   data(){
     return {
       show:true,
       a:{},
       val:'aaaa',
+      in:'fadeInRightBig',
       list:[
         {
           id:1,
@@ -136,6 +159,12 @@ export default {
     },
     close(e){
       this.show=false;
+    },
+    hover(){
+      if(this.show){
+        this.in='bounceOutLeft';
+      }
+      //this.show=!this.show;
     }
   },
 }

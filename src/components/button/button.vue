@@ -32,7 +32,7 @@
 		methods:{
 			callClick(e){
 				this.$emit('click',e,this.item);
-			}
+			},
 		}
 	}
 </script>
