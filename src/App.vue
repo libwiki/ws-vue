@@ -82,8 +82,9 @@
     <Carousel>
       <carousel-item v-for="(item,i) of list" :key="i" :bgColor="item.bgColor">
         <div style="height:300px;">
-          aa
+          <img :src="item.img">
         </div>
+        <a slot="title" href="" style="color:#fff">{{item.title}}</a>
       </carousel-item>
     </Carousel>
   </p>
@@ -129,11 +130,15 @@ export default {
       list:[
         {
           id:1,
+          title:'这是第一张文章标题',
           bgColor:'#19be6b',
+          img:'/src/assets/1.jpg',
         },
         {
           id:2,
+          title:'黄色的色彩',
           bgColor:'#ff9900',
+          img:'/src/assets/2.jpg',
         },
       ],
       btnList:[

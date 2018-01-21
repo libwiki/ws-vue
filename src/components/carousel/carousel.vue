@@ -1,10 +1,13 @@
 <template>
 	<div :class="prefix" :style="style" @mouseover="mouseover" @mouseout="mouseout">
-		<slot>
-			<carousel-item v-for="(item,i) of list" :key="i" :bgColor="item.bgColor" :height="height"></carousel-item>
-		</slot>
+		<div :class="[prefix+'-main']">
+			<slot></slot>
+		</div>
 		<Icon :class="prevClass" :style="arrowStyle" icon="return" :size="40" @click="prev"></Icon>
 		<Icon :class="nextClass" :style="arrowStyle" icon="enter" :size="40" @click="next"></Icon>
+		<ul :class="[prefix+'-nav']" v-if="items">
+			<li v-for="(item,i) of items" :class="i===current?'hover':''" @click="triggerClick(i)" @mouseover="triggerHover(i)"></li>
+		</ul>
 	</div>
 </template>
 <script>
@@ -23,7 +26,6 @@
 			duration:{type:Number,default:4000},
 			type:{type:String,default:'card'},
 			animate:{type:String,default:'slide'},
-			list:Array,
 		},
 		data(){
 			return {
@@ -31,6 +33,8 @@
 				direction:'right',
 				timer:null,
 				items:null,
+				current:this.index,
+				arrowStatus:true,
 				animateList:{
 					bounce:{
 						left:{
@@ -74,8 +78,7 @@
 					},
 
 				},
-				current:this.index,
-				arrowStatus:true,
+				
 			}
 		},
 		mounted(){
@@ -108,7 +111,6 @@
 			},
 			offsetHeight(){
 				if(!this.height&&this.items!==null){
-					console.log(this.items[0].$el.offsetHeight)
 					return this.items[0].$el.offsetHeight.toString()+'px';
 				}
 				return '0px';
@@ -172,10 +174,38 @@
 				this.play()
 				this.$emit('next',e,this.current)
 			},
+			//鼠标点击菜单切换
+			triggerClick(val){
+				if(this.trigger==='click'&&this.current!==val){
+					if(this.current<val||(val===0&&this.current!==1)){
+						this.direction='right';
+					}else{
+						this.direction='left';
+					}
+					this.current=val;
+					this.slide()
+					this.play()
+				}
+			},
+			//鼠标经过菜单切换
+			triggerHover(val){
+				if(this.trigger==='hover'&&this.current!==val){
+					if(this.current<val||(val===0&&this.current!==1)){
+						this.direction='right';
+					}else{
+						this.direction='left';
+					}
+					this.current=val;
+					this.slide()
+					this.play()
+				}
+			},
+			//箭头的显示
 			mouseover(e){
 				if(this.arrow)this.arrowStatus=false;
 				this.$emit('mouseover',e,this.current)
 			},
+			//箭头的隐藏
 			mouseout(e){
 				this.arrowStatus=true;
 				this.$emit('mouseout',e,this.current)

@@ -1,6 +1,9 @@
 <template>
 	<div :class="classs" :style="style" v-show="show">
 		<slot></slot>
+		<div :class="[prefix+'-title']">
+			<slot name="title"></slot>
+		</div>
 	</div>
 </template>
 <script>
