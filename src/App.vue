@@ -40,7 +40,9 @@
         <Button type="default" size="lg" value="danger"></Button>
       </BtnGroup>
     </p>
-    <Icon icon="manyi" size="100" color="#f40" style="background:#eee;border-radius: 50%;"/>
+    <Tooltip>
+      <Icon icon="manyi" size="100" color="#f40" style="background:#eee;border-radius: 50%;"/>
+    </Tooltip>
     <Row>
       <Col :span="{lg:23,md:12,sm:6,xs:12}" :offset="['lg1','md2','sm3','xs4']" style="background:#ccc">aaaa</Col>
       <Col>bbbbb</Col>

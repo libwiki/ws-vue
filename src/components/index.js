@@ -7,6 +7,7 @@ import Message from './message'
 import MessageBox from './message-box'
 import Tag from './tag'
 import {Carousel,CarouselItem} from './carousel'
+import Tooltip from './tooltip'
 
 const components={
 	...Base,
@@ -18,6 +19,7 @@ const components={
 	Tag,
 	Carousel,
 	CarouselItem,
+	Tooltip,
 }
 const install=function(Vue,options={}){
 	if(install.installed)return;

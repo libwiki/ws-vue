@@ -1,0 +1,19 @@
+.ws-tooltip{
+	position: relative;
+	display: inline-block;
+	.ws-tooltip-main{
+		display: inline-block;
+		position: absolute;
+		padding: 5px 10px;
+		border-radius: 3px;
+		background-color: #333;
+		color: #fff;
+		top: -20px;
+		left: 0px;
+	}
+	.ws-tooltip-arrow{
+		position: absolute;
+		top: 2px;
+		left: 40%;
+	}
+}

@@ -34,6 +34,7 @@
 				timer:null,
 				items:null,
 				current:this.index,
+				prevIndex:0,
 				arrowStatus:true,
 				animateList:{
 					bounce:{
@@ -146,6 +147,7 @@
 						item.animate=this.animateClass.out;
 					}
 				})
+				this.$emit('slide',this.current,this.prevIndex)
 			},
 			//点击时间限制(待完成)
 			prev(e){
@@ -156,6 +158,7 @@
 				if(current>this.items.length-1){
 					current=0;
 				}
+				this.prevIndex=this.current;
 				this.current=current;
 				this.slide()
 				this.play()
@@ -169,6 +172,7 @@
 				if(current<0){
 					current=this.items.length-1;
 				}
+				this.prevIndex=this.current;
 				this.current=current;
 				this.slide()
 				this.play()
@@ -182,6 +186,7 @@
 					}else{
 						this.direction='left';
 					}
+					this.prevIndex=this.current;
 					this.current=val;
 					this.slide()
 					this.play()
@@ -195,6 +200,7 @@
 					}else{
 						this.direction='left';
 					}
+					this.prevIndex=this.current;
 					this.current=val;
 					this.slide()
 					this.play()
@@ -202,11 +208,16 @@
 			},
 			//箭头的显示
 			mouseover(e){
+				if(this.timer!==null){
+					clearInterval(this.timer);
+					this.timer=null;
+				}
 				if(this.arrow)this.arrowStatus=false;
 				this.$emit('mouseover',e,this.current)
 			},
 			//箭头的隐藏
 			mouseout(e){
+				this.play()
 				this.arrowStatus=true;
 				this.$emit('mouseout',e,this.current)
 			}

@@ -7,5 +7,5 @@
 	font-size: $font-size;
 	cursor: default;
 	@include no-select;
-	@include position-center
+	@include position-center;
 }
