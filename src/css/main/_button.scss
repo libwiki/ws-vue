@@ -7,7 +7,6 @@
 	background-color: $bg-primary;
 	border:solid 1px $bg-primary;
 	@include no-select
-	@include m-x5;
 	@include btn-default;
 	&:hover{opacity: 0.8;transition:opacity 0.2s translateZ(0);}
 	&:active{opacity: 1;transition:opacity 0.4s translateZ(0);}

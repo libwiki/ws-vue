@@ -6,14 +6,16 @@
 		position: absolute;
 		padding: 5px 10px;
 		border-radius: 3px;
-		background-color: #333;
+		background-color: rgba(0,0,0,0.8);
 		color: #fff;
-		top: -20px;
-		left: 0px;
+		cursor: default;
+		z-index: 20180125;
+		@include no-select;
+		.ws-tooltip-arrow{
+			position: absolute;
+			color: rgba(0,0,0,0.8);
+
+		}
 	}
-	.ws-tooltip-arrow{
-		position: absolute;
-		top: 2px;
-		left: 40%;
-	}
+	
 }

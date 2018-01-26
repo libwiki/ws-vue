@@ -1,15 +1,11 @@
 <template>
 	<div :class="prefix">
-		<!-- <span :class="[prefix+'-main']">
-			123123123123123123333333333333
-			sdasda
-			123123
-			23423
-			asdasd
-			22342
-		</span> -->
+		<span :class="[prefix+'-main']" :style="mainStyle">
+			{{value}}
+			<Icon :icon="arrowIcon" :class="[prefix+'-arrow']" :style="iconStyle"></Icon>
+		</span>
 		<slot></slot>
-		<Icon :icon="arrowIcon" :class="[prefix+'-arrow']" :style="iconStyle"></Icon>
+		
 	</div>
 </template>
 <script>
@@ -25,8 +21,9 @@
 			}
 		},
 		props:{
+			value:String,
 			placement:{
-				default:3,
+				default:10,
 				type:Number,
 				validator(val){
 					return val>0&&val<=12;
@@ -65,37 +62,80 @@
 			},
 			mainStyle(){
 				let contextArea=this.contextArea,tooltipArea=this.tooltipArea,placement=this.placement,style={};
-				switch(placement){
-					case 'left':
-						style.left=(0-tooltipArea[0]).toString()+'px';
-					  	break;
-					case 'top':
-						style.top=(0-tooltipArea[1]).toString()+'px';
-						style.left='50%';
-						style.transform='translate(-50%,0)';
-					  	break;
-					case 'right':
-						style.left=contextArea[0].toString()+'px';
-					  	break;
-					default:
-						style.top=contextArea[1].toString()+'px';
+				if(!this.value){
+					style.width='60px';
+					style.height='25px';
 				}
+				// top
+				if(placement<=3){//上
+					style.bottom=(contextArea[1]+8).toString()+'px';
+				}else if(placement===4||placement===12){//中上
+					style.top='0px';
+				}else if(placement===5||placement===11){//中
+					style.top=((contextArea[1]-tooltipArea[1])/2).toString()+'px';
+				}else if(placement===6||placement===10){//中下
+					style.bottom='0px';
+				}else if(placement>=7&&placement<=9){//下
+					style.top=(contextArea[1]+8).toString()+'px';
+				}
+
+				//left 
+				if(placement>=10){//左
+					style.right=(contextArea[0]+8).toString()+'px';
+				}else if(placement===1||placement===9){//中左
+					style.left='0px';
+				}else if(placement===2||placement===8){//中
+					style.left=((contextArea[0]-tooltipArea[0])/2).toString()+'px';
+				}else if(placement===3||placement===7){//中右
+					style.right='0px';
+				}else if(placement>=4&&placement<=6){//右
+					style.left=(contextArea[0]+8).toString()+'px';
+				}
+				
 				return style;
 			},
 			iconStyle(){
 				let contextArea=this.contextArea,tooltipArea=this.tooltipArea,placement=this.placement,style={};
-				if(this.placement<4){//上
-					style.top='0px';
-					style.left='50%';
-					style.transform='translate(-50%,0)';
-				}else if(this.placement<7){//右
-					return 'zuojiantou';
-				}else if(this.placement<10){//下
-					style.top=tooltipArea[1].toString()+'px';
-					style.left='50%';
-					style.transform='translate(-50%,0)';
-				}else{//左
-					return 'youjiantou';
+				// top
+				if(placement<=3){//上
+					style.top=(tooltipArea[1]-5).toString()+'px';
+				}else if(placement===4||placement===12){//中上
+					if(tooltipArea[1]>=contextArea[1]){
+						style.top=((contextArea[1]/2)-8).toString()+'px';
+					}else{
+						style.top=((tooltipArea[1]/2)-8).toString()+'px';
+					}
+				}else if(placement===5||placement===11){//中
+					style.top=((tooltipArea[1]/2)-8).toString()+'px';
+				}else if(placement===6||placement===10){//中下
+					if(tooltipArea[1]>=contextArea[1]){
+						style.bottom=((contextArea[1]/2)-8).toString()+'px';
+					}else{
+						style.bottom=((tooltipArea[1]/2)-8).toString()+'px';
+					}
+				}else if(placement>=7&&placement<=9){//下
+					style.bottom=(tooltipArea[1]-6).toString()+'px';
+				}
+
+				//left 
+				if(placement>=10){//左
+					style.right='-11px';
+				}else if(placement===1||placement===9){//中左
+					if(tooltipArea[0]>=contextArea[0]){
+						style.left=((contextArea[0]/2)-8).toString()+'px';
+					}else{
+						style.left=((tooltipArea[0]/2)-8).toString()+'px';
+					}
+				}else if(placement===2||placement===8){//中
+					style.left=((tooltipArea[0]/2)-8).toString()+'px';
+				}else if(placement===3||placement===7){//中右
+					if(tooltipArea[0]>=contextArea[0]){
+						style.right=((contextArea[0]/2)-8).toString()+'px';
+					}else{
+						style.right=((tooltipArea[0]/2)-8).toString()+'px';
+					}
+				}else if(placement>=4&&placement<=6){//右
+					style.left='-11px';
 				}
 				return style;
 			},

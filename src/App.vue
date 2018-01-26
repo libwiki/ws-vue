@@ -3,12 +3,16 @@
     <Button value="primary" @click="btnClick"></Button>
     <Button type="default" value="default" icon="pifuzhuti"></Button>
     <Button type="info" value="info"></Button>
-    <Button type="warm" value="暖色warm" icon="pifuzhuti"></Button>
+    <Tooltip>
+      <Button type="warm" value="暖色warm" icon="pifuzhuti"></Button>
+    </Tooltip>
     <Button type="danger" value="danger"></Button>
     <Button value="primary" size="lg"></Button>
     <Button value="" size="sm" icon="yonghu"></Button>
-    <Button value="primary" size="xs"></Button>    
-    
+    <Button value="primary" size="xs"></Button>
+    <Tooltip>    
+      <button>asdasd</button>
+    </Tooltip>
     
     <p style="padding-top:20px;">
       <BtnGroup>
@@ -40,9 +44,7 @@
         <Button type="default" size="lg" value="danger"></Button>
       </BtnGroup>
     </p>
-    <Tooltip>
-      <Icon icon="manyi" size="100" color="#f40" style="background:#eee;border-radius: 50%;"/>
-    </Tooltip>
+    <Icon icon="manyi" size="100" color="#f40" style="background:#eee;border-radius: 50%;"/>
     <Row>
       <Col :span="{lg:23,md:12,sm:6,xs:12}" :offset="['lg1','md2','sm3','xs4']" style="background:#ccc">aaaa</Col>
       <Col>bbbbb</Col>
