@@ -1,9 +1,10 @@
 .ws-tooltip{
 	position: relative;
+	width: auto;
 	display: inline-block;
 	.ws-tooltip-main{
-		display: inline-block;
 		position: absolute;
+		width: auto;
 		padding: 5px 10px;
 		border-radius: 3px;
 		background-color: rgba(0,0,0,0.8);

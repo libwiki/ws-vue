@@ -10,8 +10,10 @@
 </template>
 <script>
 	import Icon from '../icon'
+	import mixin from '../../mixins'
 	export default {
 		name:'Tooltip',
+		mixins:[mixin],
 		props:{
 			value:String,
 			placement:{
@@ -30,7 +32,14 @@
 				// tooltip:null,
 				contextArea:[0,0],
 				tooltipArea:[0,0],
+				tooltipWidth:0,
 			}
+		},
+		created(){
+			if(this.value){
+				this.tooltipWidth=this.getChartLength(this.value,0);
+			}
+			console.log(this.tooltipWidth)
 		},
 		mounted(){
 			this.init();
@@ -76,9 +85,10 @@
 			},
 			mainStyle(){
 				let contextArea=this.contextArea,tooltipArea=this.tooltipArea,placement=this.placement,style={};
-				if(!this.value){
-					style.width='60px';
-					style.height='25px';
+				if(this.tooltipWidth>0){
+					let w=this.tooltipWidth*6;
+					w=w>200?200:w;
+					style['min-width']=w.toString()+'px';
 				}
 				// top
 				if(placement<=3){//上
