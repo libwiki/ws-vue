@@ -3,7 +3,7 @@
     <Button value="primary" @click="btnClick"></Button>
     <Button type="default" value="default" icon="pifuzhuti"></Button>
     <Button type="info" value="info"></Button>
-    <Tooltip>
+    <Tooltip value="提示内容sadasds1提示内容sadasds1提示内容sadasds1">
       <Button type="warm" value="暖色warm" icon="pifuzhuti"></Button>
     </Tooltip>
     <Button type="danger" value="danger"></Button>

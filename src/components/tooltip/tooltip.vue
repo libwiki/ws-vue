@@ -1,6 +1,6 @@
 <template>
-	<div :class="prefix">
-		<span :class="[prefix+'-main']" :style="mainStyle">
+	<div :class="prefix" @mouseover="mouseover"  @mouseout="mouseout">
+		<span :class="[prefix+'-main']" :style="mainStyle" v-show="show">
 			{{value}}
 			<Icon :icon="arrowIcon" :class="[prefix+'-arrow']" :style="iconStyle"></Icon>
 		</span>
@@ -12,27 +12,55 @@
 	import Icon from '../icon'
 	export default {
 		name:'Tooltip',
-		data(){
-			return {
-				prefix:'ws-tooltip',
-				context:null,
-				tooltip:null,
-				arrow:null,
-			}
-		},
 		props:{
 			value:String,
 			placement:{
-				default:10,
+				default:8,
 				type:Number,
 				validator(val){
 					return val>0&&val<=12;
 				},
 			}
 		},
+		data(){
+			return {
+				prefix:'ws-tooltip',
+				show:false,
+				// context:null,
+				// tooltip:null,
+				contextArea:[0,0],
+				tooltipArea:[0,0],
+			}
+		},
 		mounted(){
-			this.context=this.$slots.default[0].elm;
-			this.tooltip=this.$el.children[0];
+			this.init();
+		},
+		updated(){
+			this.init();
+		},
+		methods:{
+			init(){
+				const context=this.$slots.default[0].elm;
+				const tooltip=this.$el.children[0];
+				let oldContextArea=this.contextArea,oldTooltipArea=this.tooltipArea,contextArea=[context.offsetWidth,context.offsetHeight],tooltipArea=[tooltip.offsetWidth,tooltip.offsetHeight];
+				if(oldContextArea[0]!==contextArea[0]||oldContextArea[1]!==contextArea[1]){
+					this.contextArea=contextArea;
+				}
+				if(oldTooltipArea[0]!==tooltipArea[0]||oldTooltipArea[1]!==tooltipArea[1]){
+					this.tooltipArea=tooltipArea;
+				}
+
+			},
+			mouseover(e){
+				if(this.value){
+					this.show=true;
+				}
+				this.$emit('mouseover',e);
+			},
+			mouseout(e){
+				this.show=false;
+				this.$emit('mouseout',e);
+			},
 		},
 		computed:{
 			arrowIcon(){
@@ -45,20 +73,6 @@
 				}else{
 					return 'youjiantou';
 				}
-			},
-			contextArea(){
-				let area=[0,0];
-				if(this.context!==null){
-					area=[this.context.offsetWidth,this.context.offsetHeight];
-				}
-				return area;
-			},
-			tooltipArea(){
-				let area=[0,0];
-				if(this.tooltip!==null){
-					area=[this.tooltip.offsetWidth,this.tooltip.offsetHeight];
-				}
-				return area;
 			},
 			mainStyle(){
 				let contextArea=this.contextArea,tooltipArea=this.tooltipArea,placement=this.placement,style={};
@@ -79,7 +93,7 @@
 					style.top=(contextArea[1]+8).toString()+'px';
 				}
 
-				//left 
+				// left 
 				if(placement>=10){//左
 					style.right=(contextArea[0]+8).toString()+'px';
 				}else if(placement===1||placement===9){//中左
@@ -106,7 +120,7 @@
 						style.top=((tooltipArea[1]/2)-8).toString()+'px';
 					}
 				}else if(placement===5||placement===11){//中
-					style.top=((tooltipArea[1]/2)-8).toString()+'px';
+					style.top=((contextArea[1]/2)-8).toString()+'px';
 				}else if(placement===6||placement===10){//中下
 					if(tooltipArea[1]>=contextArea[1]){
 						style.bottom=((contextArea[1]/2)-8).toString()+'px';
@@ -117,7 +131,7 @@
 					style.bottom=(tooltipArea[1]-6).toString()+'px';
 				}
 
-				//left 
+				// left 
 				if(placement>=10){//左
 					style.right='-11px';
 				}else if(placement===1||placement===9){//中左
@@ -140,9 +154,7 @@
 				return style;
 			},
 		},
-		methods:{
-
-		}
+		
 		
 	}
 </script>
