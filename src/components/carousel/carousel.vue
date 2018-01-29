@@ -153,10 +153,10 @@
 			prev(e){
 				if(this.items===null)return;
 				let current=this.current;
-				current++;
 				this.direction='left';
-				if(current>this.items.length-1){
-					current=0;
+				current--;
+				if(current<0){
+					current=this.items.length-1;
 				}
 				this.prevIndex=this.current;
 				this.current=current;
@@ -167,10 +167,10 @@
 			next(e){
 				if(this.items===null)return;
 				let current=this.current;
-				current--;
 				this.direction='right';
-				if(current<0){
-					current=this.items.length-1;
+				current++;
+				if(current>this.items.length-1){
+					current=0;
 				}
 				this.prevIndex=this.current;
 				this.current=current;

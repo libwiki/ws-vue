@@ -68,31 +68,22 @@
       <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" value="这是Warm标签" :closable="true"></Tag>
       <Button type="default" size="xs" @click="hover">点击查看动画</Button>
     </p>
-    <div id="example-3">
-  
-  <p style="padding-top:30px;">
-
-    <!-- <Animates
-      in="fadeInRightBig"
-      out="bounceOutLeft"
-      :group="true"
-    >
-      <Button type="warm" value="暖色warm" icon="pifuzhuti" v-show="show" key="button"></Button>
-      <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" v-show="!show" value="这是Warm标签" key="tag"></Tag>
-    </Animates> -->
-    <!-- <h1 v-show="show" :class="classs">123123123123123</h1> -->
-  </p>
-  <p style="padding-top:30px;margin-left:20%;padding-bottom:30px; width:50%;height:300px;">
-    <Carousel>
-      <carousel-item v-for="(item,i) of list" :key="i" :bgColor="item.bgColor">
-        <div style="height:300px;">
-          <img :src="item.img">
-        </div>
-        <a slot="title" href="" style="color:#fff">{{item.title}}</a>
-      </carousel-item>
-    </Carousel>
-  </p>
-</div>
+    
+    <p style="padding-top:30px;margin-left:20%;padding-bottom:30px; width:50%;height:300px;">
+      <!-- 轮换图 -->
+      <Carousel>
+        <carousel-item v-for="(item,i) of list" :key="i" :bgColor="item.bgColor">
+          <div style="height:300px;">
+            <img :src="item.img">
+          </div>
+          <a slot="title" href="" style="color:#fff">{{item.title}}</a>
+        </carousel-item>
+      </Carousel>
+    </p>
+    <p style="padding-top:50px;padding-bottom:30px; margin-left:20%;">
+      <!-- Tags 标签页 -->
+      <Tags></Tags>
+    </p>
   </div>
 </template>
 
@@ -131,20 +122,6 @@ export default {
       a:{},
       val:'aaaa',
       in:'fadeInRightBig',
-      list:[
-        {
-          id:1,
-          title:'这是第一张文章标题',
-          bgColor:'#19be6b',
-          img:'/src/assets/1.jpg',
-        },
-        {
-          id:2,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/2.jpg',
-        },
-      ],
       btnList:[
         {
           item:111111111111,
@@ -160,6 +137,39 @@ export default {
         },
 
       ],
+      list:[
+        {
+          id:1,
+          title:'这是第一张文章标题',
+          bgColor:'#19be6b',
+          img:'/src/assets/1.jpg',
+        },
+        {
+          id:2,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/2.jpg',
+        },
+        {
+          id:3,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/3.jpg',
+        },
+        {
+          id:4,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/4.jpg',
+        },
+        {
+          id:5,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+      ],
+      
     }
   },
   methods:{

@@ -35,12 +35,6 @@
 				tooltipWidth:0,
 			}
 		},
-		created(){
-			if(this.value){
-				this.tooltipWidth=this.getChartLength(this.value,0);
-			}
-			console.log(this.tooltipWidth)
-		},
 		mounted(){
 			this.init();
 		},
@@ -58,7 +52,10 @@
 				if(oldTooltipArea[0]!==tooltipArea[0]||oldTooltipArea[1]!==tooltipArea[1]){
 					this.tooltipArea=tooltipArea;
 				}
-
+				//提示框内容宽度控制
+				if(this.value){
+					this.tooltipWidth=this.getChartLength(this.value,0);
+				}
 			},
 			mouseover(e){
 				if(this.value){
@@ -86,7 +83,7 @@
 			mainStyle(){
 				let contextArea=this.contextArea,tooltipArea=this.tooltipArea,placement=this.placement,style={};
 				if(this.tooltipWidth>0){
-					let w=this.tooltipWidth*6;
+					let w=this.tooltipWidth*10;
 					w=w>200?200:w;
 					style['min-width']=w.toString()+'px';
 				}
