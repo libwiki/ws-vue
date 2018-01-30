@@ -67,6 +67,9 @@
       <Tag type="primary" hoverType="multi" value="这是标签" :closable="true"></Tag>
       <Tag type="warm" hoverType="multi" color="#f00" bgColor="#f00" value="这是Warm标签" :closable="true"></Tag>
       <Button type="default" size="xs" @click="hover">点击查看动画</Button>
+      <Animates in="bounceInLeft" out="bounceOutRight" tag="p">
+        <p v-show="show">asdasdasdasd</p>
+      </Animates>
     </p>
     
     <p style="padding-top:30px;margin-left:20%;padding-bottom:30px; width:50%;height:300px;">
@@ -80,9 +83,27 @@
         </carousel-item>
       </Carousel>
     </p>
-    <p style="padding-top:50px;padding-bottom:30px; margin-left:20%;">
-      <!-- Tags 标签页 -->
-      <Tags></Tags>
+
+    <p style="width:50%; padding-top:50px;padding-bottom:30px; margin-left:20%;">
+      <!-- Tabs 标签页 -->
+      <Tabs :data="list" :keys="{item:'id',title:'bgColor',content:'title'}">
+        <template slot-scope="props">
+          <h1>{{props.val.id}}.{{props.val.bgColor}}</h1>
+          <h6>{{props.val.title}}</h6>
+          <h1>{{props.val.id}}.{{props.val.bgColor}}</h1>
+          <h6>{{props.val.title}}</h6>
+          <h1>{{props.val.id}}.{{props.val.bgColor}}</h1>
+          <h6>{{props.val.title}}</h6>
+          <h1>{{props.val.id}}.{{props.val.bgColor}}</h1>
+          <h6>{{props.val.title}}</h6>
+          <h1>{{props.val.id}}.{{props.val.bgColor}}</h1>
+          <h6>{{props.val.title}}</h6>
+          <h1>{{props.val.id}}.{{props.val.bgColor}}</h1>
+          <h6>{{props.val.title}}</h6>
+          <h1>{{props.val.id}}.{{props.val.bgColor}}</h1>
+          <h6>{{props.val.title}}</h6>
+        </template>
+      </Tabs>
     </p>
   </div>
 </template>
@@ -168,6 +189,24 @@ export default {
           bgColor:'#ff9900',
           img:'/src/assets/5.jpg',
         },
+        {
+          id:6,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:7,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:8,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
       ],
       
     }
@@ -183,7 +222,7 @@ export default {
       if(this.show){
         this.in='bounceOutLeft';
       }
-      //this.show=!this.show;
+      this.show=!this.show;
     }
   },
 }

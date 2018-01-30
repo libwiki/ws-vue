@@ -6,7 +6,7 @@ import Modal from './modal'
 import Message from './message'
 import MessageBox from './message-box'
 import Tag from './tag'
-import Tags from './tags'
+import Tabs from './tabs'
 import {Carousel,CarouselItem} from './carousel'
 import Tooltip from './tooltip'
 
@@ -18,7 +18,7 @@ const components={
 	Row,
 	Col,
 	Tag,
-	Tags,
+	Tabs,
 	Carousel,
 	CarouselItem,
 	Tooltip,
