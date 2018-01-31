@@ -5,9 +5,11 @@
 				<div :ref="prefix+'-nav-item'" :class="[current===i?'hover':'',prefix+'-nav-item']" v-for="(item,i) of data"  @click="tabClick(i)">
 				{{item[finalKeys.title]}}
 				</div>
+				
 				<Icon :class="[prefix+'-nav-prev']" icon="return" :size="20" v-if="arrow" @click="prev"></Icon>
 				<Icon :class="[prefix+'-nav-next']" icon="enter" :size="20" v-if="arrow" @click="next"></Icon>
-				<div :class="[prefix+'-nav-active']" v-if="false">这是可滑动的下边框(未实现)</div>
+
+				<div :class="[prefix+'-nav-active']" v-if="type==='line'" :style="lineHover"><!-- 这是可滑动的下边框实现 --></div>
 			</div>
 		</div>
 		<div :class="[prefix+'-main']" :style="mainStyle">
@@ -35,7 +37,7 @@
 			},
 			type:{
 				type:String,
-				default:'card',
+				default:'line',
 			}
 		},
 		data(){
@@ -48,6 +50,8 @@
 				navWidth:0,//导航区实际宽度
 				navMarginLeft:0,
 				mainHeight:0,//内容最大高度
+				lineHoverLeft:0,//当前导航下划线左边距
+				lineHoverWidth:0,//当前导航下划线宽度
 				animateList:{
 					left:{
 						in:'bounceInLeft',
@@ -62,6 +66,7 @@
 		},
 		mounted(){
 			this.init();
+			this.initLineHover(this.index);
 		},
 		updated(){
 			this.init();
@@ -95,6 +100,9 @@
 			arrow(){
 				return this.navWidth>this.navMaxWidth;
 			},
+			lineHover(){
+				return {left:this.lineHoverLeft.toString()+'px',width:this.lineHoverWidth.toString()+'px'};
+			}
 		},
 		methods:{
 			init(){
@@ -102,11 +110,10 @@
 					navMaxWidth=refs[this.prefix+'-nav'].offsetWidth,
 					navWidth=this.getNavWidth(),
 					mainHeight=this.getMainHeight();
-				
+
 				if(this.navMaxWidth!==navMaxWidth)this.navMaxWidth=navMaxWidth;
 				if(Math.abs(this.navWidth-navWidth)>5)this.navWidth=navWidth;
 				if(this.mainHeight!==mainHeight)this.mainHeight=mainHeight;
-				
 			},
 			//获取导航区宽度
 			getNavWidth(index=-1,isOne=-1){
@@ -131,27 +138,6 @@
 				})
 				return h;
 			},
-			tabClick(i){
-				let current=this.current,data=this.data,keys=this.finalKeys,item=data[i][keys.item];
-				if(current!==i){
-					let pl=this.getNavWidth(i-1),w=this.getNavWidth(1,i),nl=this.getNavWidth(i)+w;
-					if(Math.abs(this.navMarginLeft)>pl){
-						this.prev(10-pl);
-					}else if((nl-Math.abs(this.navMarginLeft)+10)>this.navMaxWidth){
-						this.next(this.navMarginLeft-w);
-					}
-					this.prevIndex=current;
-					this.current=i;
-					this.slideDirection=i>current?'right':'left';
-					this.$emit('tab-switch',i,current);
-				}
-
-				if(item){
-					this.$emit('tab-click',i,item);
-				}else{
-					this.$emit('tab-click',i);
-				}
-			},
 			prev(left){
 				if(typeof left !=='number'){
 					let navMarginLeft=this.navMarginLeft,navMaxWidth=this.navMaxWidth;
@@ -172,7 +158,40 @@
 						this.navMarginLeft=rs.navMarginLeft;
 					});
 				}
-			}
+			},
+			initLineHover(i){
+				if(this.type!=='line')return;
+				let pl=i>0?this.getNavWidth(i-1):0,w=this.getNavWidth(1,i);
+				this.tween({lineHoverLeft:this.lineHoverLeft,lineHoverWidth:this.lineHoverWidth},{lineHoverLeft:pl-this.navMarginLeft,lineHoverWidth:w},rs=>{
+					this.lineHoverLeft=rs.lineHoverLeft;
+					this.lineHoverWidth=rs.lineHoverWidth;
+				},300);
+			},
+			tabClick(i){
+				let current=this.current,data=this.data,keys=this.finalKeys,item=data[i][keys.item];
+				if(current!==i){
+					let pl=i>0?this.getNavWidth(i-1):0,w=this.getNavWidth(1,i),nl=this.getNavWidth(i)+w;
+					if(Math.abs(this.navMarginLeft)>pl){
+						this.prev(10-pl);
+					}else if((nl-Math.abs(this.navMarginLeft)+10)>this.navMaxWidth){
+						this.next(this.navMarginLeft-w);
+					}
+					this.prevIndex=current;
+					this.current=i;
+					this.slideDirection=i>current?'right':'left';
+
+					this.initLineHover(i);
+					
+					this.$emit('tab-switch',i,current);
+				}
+
+				if(item){
+					this.$emit('tab-click',i,item);
+				}else{
+					this.$emit('tab-click',i);
+				}
+			},
+			
 		}
 	}
 </script>

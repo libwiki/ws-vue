@@ -11,16 +11,16 @@
 			opacity:{default:0.75},
 			show:{type:Boolean,default:false},
 		},
+		data(){
+			return {
+				prefix:'ws-message',
+				zIndex:this.$modal.zIndex+20180115,
+			}
+		},
 		computed:{
 			styles(){
 				let styles={opacity:this.opacity,'z-index':this.zIndex,}
 				return styles
-			}
-		},
-		data(){
-			return {
-				prefix:'ws-message',
-				zIndex:this.$modal.zIndex+20180115
 			}
 		},
 		

@@ -123,7 +123,7 @@ export default {
       btnList:this.btnList,
       
     }
-    //this.$msg('这是提示信息1')
+    this.$msg('这是提示信息1')
     //this.$msgbox(options)
   },
   mixins:[mixins],
@@ -196,60 +196,6 @@ export default {
         },
         {
           id:5,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:6,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:7,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:8,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:9,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:10,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:11,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:12,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:13,
-          title:'黄色的色彩',
-          bgColor:'#ff9900',
-          img:'/src/assets/5.jpg',
-        },
-        {
-          id:14,
           title:'黄色的色彩',
           bgColor:'#ff9900',
           img:'/src/assets/5.jpg',

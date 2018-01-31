@@ -18,7 +18,6 @@ Message.Instance=function(Vue){
 				},
 			})
 		},
-		
 		methods:{
 			setMsg(message,duration=null,opacity=null){
 				if(!message)return;

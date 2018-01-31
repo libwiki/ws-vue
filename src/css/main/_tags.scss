@@ -61,21 +61,13 @@
 			}
 		}
 		&.ws-tabs-nav-line{
-			// .ws-tabs-nav-active{
-			// 	width: 100px;
-			// 	margin-left: 0px;
-			// 	height: 2px;
-			// 	background-color: $bg-info;
-			// 	float: left;
-			// }
-			.ws-tabs-nav-item{
-				margin-bottom: -2px;
-				&.hover{
-					border-bottom:solid 2px $bg-info;
-					border-bottom-color:$bg-info;
-				}
+			.ws-tabs-nav-active{
+				position: absolute;
+				left: 0px;
+				bottom: 0px;
+				height: 2px;
+				background-color: $bg-info;
 			}
-
 		}
 	}
 	.ws-tabs-main{
