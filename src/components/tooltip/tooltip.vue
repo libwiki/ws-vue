@@ -10,10 +10,10 @@
 </template>
 <script>
 	import Icon from '../icon'
-	import mixin from '../../mixins'
+	import mixins from '../../mixins'
 	export default {
 		name:'Tooltip',
-		mixins:[mixin],
+		mixins:[mixins],
 		props:{
 			value:String,
 			placement:{
@@ -54,7 +54,7 @@
 				}
 				//提示框内容宽度控制
 				if(this.value){
-					this.tooltipWidth=this.getChartLength(this.value,0);
+					this.tooltipWidth=this.getCharLength(this.value,0);
 				}
 			},
 			mouseover(e){

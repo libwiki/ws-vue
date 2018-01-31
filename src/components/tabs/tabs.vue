@@ -22,8 +22,10 @@
 <script>
 	import {Animates} from '../base'
 	import Icon from '../icon'
+	import mixins from '../../mixins'
 	export default {
 		name:'Tabs',
+		mixins:[mixins],
 		props:{
 			data:Array,
 			keys:Object,
@@ -33,7 +35,7 @@
 			},
 			type:{
 				type:String,
-				default:'line',
+				default:'card',
 			}
 		},
 		data(){
@@ -96,21 +98,22 @@
 		},
 		methods:{
 			init(){
-				const refs=this.$refs;
-				let navMaxWidth=refs[this.prefix+'-nav'].offsetWidth,
-					navWidth=this.getNavWidth(refs[this.prefix+'-nav-item']),
-					mainHeight=this.getMainHeight(refs[this.prefix+'-main-item']);
+				let refs=this.$refs,
+					navMaxWidth=refs[this.prefix+'-nav'].offsetWidth,
+					navWidth=this.getNavWidth(),
+					mainHeight=this.getMainHeight();
 				
 				if(this.navMaxWidth!==navMaxWidth)this.navMaxWidth=navMaxWidth;
 				if(Math.abs(this.navWidth-navWidth)>5)this.navWidth=navWidth;
 				if(this.mainHeight!==mainHeight)this.mainHeight=mainHeight;
-
-				console.log(refs);
 				
 			},
 			//获取导航区宽度
-			getNavWidth(navArray,index=-1){
-				let w=0;
+			getNavWidth(index=-1,isOne=-1){
+				let w=0,refs=this.$refs,navArray=refs[this.prefix+'-nav-item'];
+				if(isOne>=0&&navArray[isOne]){
+					return navArray[isOne].offsetWidth;
+				}
 				navArray.forEach((item,i)=>{
 					if(index===-1){
 						w+=item.offsetWidth;
@@ -121,8 +124,8 @@
 				return w;
 			},
 			//获取内容区最大高度
-			getMainHeight(mainArray){
-				let h=0;
+			getMainHeight(){
+				let h=0,refs=this.$refs,mainArray=refs[this.prefix+'-main-item'];
 				mainArray.forEach(item=>{
 					if(item.offsetHeight>h)h=item.offsetHeight;
 				})
@@ -131,24 +134,44 @@
 			tabClick(i){
 				let current=this.current,data=this.data,keys=this.finalKeys,item=data[i][keys.item];
 				if(current!==i){
+					let pl=this.getNavWidth(i-1),w=this.getNavWidth(1,i),nl=this.getNavWidth(i)+w;
+					if(Math.abs(this.navMarginLeft)>pl){
+						this.prev(10-pl);
+					}else if((nl-Math.abs(this.navMarginLeft)+10)>this.navMaxWidth){
+						this.next(this.navMarginLeft-w);
+					}
 					this.prevIndex=current;
 					this.current=i;
 					this.slideDirection=i>current?'right':'left';
 					this.$emit('tab-switch',i,current);
 				}
+
 				if(item){
 					this.$emit('tab-click',i,item);
 				}else{
 					this.$emit('tab-click',i);
 				}
 			},
-			prev(){
-				let left=this.navMarginLeft+this.navMaxWidth;
-				if(left<=0)this.navMarginLeft=left;
+			prev(left){
+				if(typeof left !=='number'){
+					let navMarginLeft=this.navMarginLeft,navMaxWidth=this.navMaxWidth;
+					left=navMarginLeft<navMaxWidth?0:navMarginLeft+navMaxWidth;
+				}
+				if(left<=0){
+					this.tween({navMarginLeft:this.navMarginLeft},{navMarginLeft:left},rs=>{
+						this.navMarginLeft=rs.navMarginLeft;
+					});
+				}
 			},
-			next(){
-				let left=this.navMarginLeft-this.navMaxWidth;
-				if(Math.abs(left)<this.navWidth+5)this.navMarginLeft=left;
+			next(left){
+				if(typeof left !=='number'){
+					left=this.navMarginLeft-this.navMaxWidth;
+				}
+				if(Math.abs(left)<this.navWidth+5){
+					this.tween({navMarginLeft:this.navMarginLeft},{navMarginLeft:left},rs=>{
+						this.navMarginLeft=rs.navMarginLeft;
+					});
+				}
 			}
 		}
 	}

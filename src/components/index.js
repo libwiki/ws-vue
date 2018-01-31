@@ -1,3 +1,5 @@
+import 'animate.css'; // https://daneden.github.io/animate.css/
+import TWEEN from '@tweenjs/tween.js'; // https://github.com/tweenjs/tween.js/
 import * as Base from './base'
 import Icon from './icon'
 import {Button,BtnGroup} from './button'
@@ -23,13 +25,14 @@ const components={
 	CarouselItem,
 	Tooltip,
 }
+
 const install=function(Vue,options={}){
 	if(install.installed)return;
 	Object.keys(components).forEach(key => {
         Vue.component(key, components[key]);
     })
 	
-    
+    Vue.prototype.TWEEN=TWEEN;
     Vue.prototype.$modal=Modal.Instance(Vue);
     Vue.prototype.$msg=Message.Instance(Vue).message;
     Vue.prototype.$msgbox=MessageBox.Instance(Vue).open;
@@ -43,4 +46,5 @@ const api={
 	install,
 	...components,
 }
+
 export default api

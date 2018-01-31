@@ -7,10 +7,10 @@
 </template>
 <script>
 	import Icon from '../icon'
-	import mixin from '../../mixins'
+	import mixins from '../../mixins'
 	export default{
 		name:'Tag',
-		mixins:[mixin],
+		mixins:[mixins],
 		props:{
 			item:[String,Number],
 			value:String,
@@ -60,7 +60,7 @@
 				return style;
 			},
 			inputWidth(){
-				return this.getChartLength(this.value);
+				return this.getCharLength(this.value);
 			}
 		},
 		created(){

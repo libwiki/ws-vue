@@ -2,21 +2,18 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
 import wsvue from './components'
 import './css/index'
 
-//https://daneden.github.io/animate.css/
-import 'animate.css'
 
 Vue.use(wsvue);
 
-Vue.config.productionTip = true
+Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
-  router,
   template: '<App/>',
   components: { App }
 })
+	

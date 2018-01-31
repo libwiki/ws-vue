@@ -71,7 +71,9 @@
         <p v-show="show">asdasdasdasd</p>
       </Animates>
     </p>
-    
+    <p style="padding-top:30px;">
+      <input type="text" v-model="number" style="border:solid 1px #ccc;">{{animatedNumber}}
+    </p>
     <p style="padding-top:30px;margin-left:20%;padding-bottom:30px; width:50%;height:300px;">
       <!-- 轮换图 -->
       <Carousel>
@@ -109,6 +111,7 @@
 </template>
 
 <script>
+import mixins from './mixins'
 export default {
   name: 'app',
   created(){
@@ -120,9 +123,10 @@ export default {
       btnList:this.btnList,
       
     }
-    // this.$msg('这是提示信息1')
+    //this.$msg('这是提示信息1')
     //this.$msgbox(options)
   },
+  mixins:[mixins],
   computed:{
     classs(){
       return ['animated',this.in];
@@ -135,12 +139,19 @@ export default {
       }else{
         this.in='bounceOutLeft';
       }
+    },
+    number(newValue, oldValue) {
+      this.tween({tweeningNumber:oldValue},{tweeningNumber:newValue},rs=>{
+        this.animatedNumber = rs.tweeningNumber.toFixed(0)
+      });
     }
   },
   data(){
     return {
       show:true,
       a:{},
+      number:0,
+      animatedNumber:0,
       val:'aaaa',
       in:'fadeInRightBig',
       btnList:[
@@ -203,6 +214,42 @@ export default {
         },
         {
           id:8,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:9,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:10,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:11,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:12,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:13,
+          title:'黄色的色彩',
+          bgColor:'#ff9900',
+          img:'/src/assets/5.jpg',
+        },
+        {
+          id:14,
           title:'黄色的色彩',
           bgColor:'#ff9900',
           img:'/src/assets/5.jpg',
