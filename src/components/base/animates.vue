@@ -22,7 +22,7 @@
 </template>
 <script>
 	export default {
-		name:'Animate',
+		name:'Animates',
 		props:{
 			group:{type:Boolean,default:false},
 			name:String,

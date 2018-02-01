@@ -16,17 +16,14 @@
 		padding: 0 1em;
 		cursor: pointer;
 		text-align: center;
-		i{
-			color: $bg-color8;
-		}
+		color: $bg-color8;
+		font-weight: normal;
 		&:hover{
 			// (会导致某些页面节点字体抖动、模糊 暂时弃用)
 			// transform:rotate(360deg);
 			// transition:translateZ(0) transform 1s;
-			i{
-				color:$bg-primary;
-				transition:transform 0.4s;
-			}
+			color:$bg-primary;
+			transition:transform 0.4s;
 		}
 	}
 
@@ -37,6 +34,7 @@
 	min-height: 80px;
 	max-height: 90%;
 	padding: 10px;
+	font-weight: normal;
 }
 .ws-lay-foot{
 	width: 100%;

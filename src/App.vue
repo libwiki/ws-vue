@@ -115,16 +115,16 @@ import mixins from './mixins'
 export default {
   name: 'app',
   created(){
-    let options={
-      content:'这是提示信息0000',
-      title:'标题标题121231',
-      show:true,
-      modal:true,
-      btnList:this.btnList,
-      
-    }
-    this.$msg('这是提示信息1')
-    //this.$msgbox(options)
+    //this.$msg('这是提示信息1')
+    this.$msgbox('这是提示信息0000','标题标题121231',this.btnList)
+    //this.$msgbox('内容区域二22222222222222222222',)
+    // let table = document.createElement("H1");
+    // table.id = "table";
+    // table.innerHTML='这是第一张文章标题';
+    // this.$modal.open().then(ele=>{
+    //    ele.appendChild(table)
+    //    console.log(ele)
+    // });
   },
   mixins:[mixins],
   computed:{

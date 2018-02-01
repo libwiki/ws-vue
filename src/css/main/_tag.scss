@@ -9,28 +9,20 @@
 	    display: inline-block;  
 	    clear: both;  
 	}
-	//display: inline-flex;
-	//justify-content:space-between;
 	.ws-tag-content{
-		//outline: none;
 		float: left;
-		//display: inline-block;
 		color: $bg-success;
 		min-width: 1px;
 		min-height: 1px;
 		@include tag-sm;
 		@include no-select;
 	}
-	
 	&:hover{opacity: 0.8;transition:opacity 0.2s translateZ(0);}
 	.ws-tag-close{
 		float: left;
-		line-height: 25px;
 		cursor: pointer;
-		margin-top: 1px;
-		i{
-			color: $bg-color8;
-		}
+		margin-top: 5px;
+		color: $bg-color8;
 	}
 	&.ws-tag-multi:hover,&.ws-tag-checked{
 		background-color: $bg-success;
@@ -42,7 +34,7 @@
 			color: #fff;
 		}
 	}
-	.ws-tag-close i:hover{
+	.ws-tag-close:hover{
 		background-color:$bg-warm;
 		color: #fff;
 		border-radius: 50%;
@@ -54,8 +46,9 @@
 		@include tag-lg;
 	}
 	.ws-tag-close{
-		margin-top: 3px;
-		line-height: 30px;
+		margin-top: 11px;
+		line-height: 18px;
+		font-size: 18px;
 	}
 }
 .ws-tag-xs{
@@ -64,8 +57,9 @@
 		@include tag-xs;
 	}
 	.ws-tag-close{
-		margin-top: 2px;
-		line-height: 15px;
+		margin-top: 6px;
+		line-height: 12px;
+		font-size: 12px;
 	}
 }
 
@@ -95,7 +89,7 @@
 		background-color: $bg-warm;
 		border-color: $bg-warm;
 	}
-	.ws-tag-close i:hover{
+	.ws-tag-close:hover{
 		background-color:$bg-danger;
 	}
 }

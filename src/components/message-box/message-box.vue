@@ -13,7 +13,6 @@
 			title:String,
 			content:String,
 			show:{type:Boolean,default:false},
-			modal:{type:Boolean,default:false},
 			btnList:{
 				type:Array,
 				default(){
@@ -27,9 +26,8 @@
 				zIndex:this.$modal.zIndex,
 				isMove:false,
 				moveOptions:{
-					left: '50%',
-					top: '50%',
-					transform:'translate(-50%,-50%)'
+					// left: '50%',
+					// top: '50%',
 				},
 			}
 		},
@@ -47,6 +45,7 @@
 			close(e){
 				this.$emit('close',e)
 			},
+			//可拖动的组件
 			mousedown(e){
 				this.isMove=true;
 				let self=this,w=window.innerWidth,h=window.innerHeight,abs_x=e.pageX-e.offsetX,abs_y=e.pageY-e.offsetY;

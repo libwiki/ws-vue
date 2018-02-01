@@ -51,9 +51,19 @@ Modal.Instance=function(Vue){
 			      }
 			    })
 			},
+			getElement(){
+				let el=this.$el,eleAll=document.querySelectorAll('#'+el.id);
+			    let ele=Array.from(eleAll).filter(item=>{
+			      return item.attributes.item.value!=='undefined'&&item.attributes.item.value===el.attributes.item.value;
+			    });
+			    return ele[0];
+			},
 			//开启关闭
 			open(val=true){
-				this.show=val
+				this.show=val;
+				return new Promise(resolve=>{
+					resolve(this.getElement());
+				});
 			},
 			//仅当不存在弹框时关闭
 			close(){

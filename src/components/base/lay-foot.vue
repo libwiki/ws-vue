@@ -1,7 +1,7 @@
 <template>
 	<div :class="prefix">
 		<slot>
-			<Button v-for="(item,key) of btnList" :type="item.type" @click="item.callback" :key="key" :item="item.item">{{item.value}}</Button>
+			<Button v-for="(item,key) of btnList" :type="item.type" @click="item.callback" :key="key" :item="item.item" style="margin-right:10px;">{{item.value}}</Button>
 		</slot>
 	</div>
 </template>

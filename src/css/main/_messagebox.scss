@@ -1,5 +1,6 @@
 .ws-message-box{
 	position: absolute;
+	visibility: visible;
 	width: auto;
 	height: auto;
 	min-width: 380px;
@@ -8,5 +9,4 @@
 	background-color: #fff;
 	box-shadow: 0 0 3px $bg-color8;
 	border-radius: 5px;
-	
 }
