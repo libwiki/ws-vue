@@ -161,7 +161,7 @@
 			},
 			initLineHover(i){
 				if(this.type!=='line')return;
-				let pl=i>0?this.getNavWidth(i-1):0,w=this.getNavWidth(1,i);
+				let pl=i>0?this.getNavWidth(i-1):0,w=this.getNavWidth(0,i);
 				this.tween({lineHoverLeft:this.lineHoverLeft,lineHoverWidth:this.lineHoverWidth},{lineHoverLeft:pl-this.navMarginLeft,lineHoverWidth:w},rs=>{
 					this.lineHoverLeft=rs.lineHoverLeft;
 					this.lineHoverWidth=rs.lineHoverWidth;
@@ -169,8 +169,9 @@
 			},
 			tabClick(i){
 				let current=this.current,data=this.data,keys=this.finalKeys,item=data[i][keys.item];
+
 				if(current!==i){
-					let pl=i>0?this.getNavWidth(i-1):0,w=this.getNavWidth(1,i),nl=this.getNavWidth(i)+w;
+					let pl=i>0?this.getNavWidth(i-1):0,w=this.getNavWidth(0,i),nl=this.getNavWidth(i);
 					if(Math.abs(this.navMarginLeft)>pl){
 						this.prev(10-pl);
 					}else if((nl-Math.abs(this.navMarginLeft)+10)>this.navMaxWidth){

@@ -31,6 +31,9 @@
 				},
 			}
 		},
+		mounted(){
+			this.windowResize();
+		},
 		computed:{
 			style(){
 				let moveOptions=this.moveOptions,style={'z-index':this.zIndex}
@@ -48,8 +51,11 @@
 			//可拖动的组件
 			mousedown(e){
 				this.isMove=true;
-				let self=this,w=window.innerWidth,h=window.innerHeight,abs_x=e.pageX-e.offsetX,abs_y=e.pageY-e.offsetY;
-				if (document.documentElement && document.documentElement.clientHeight && document.documentElement.clientWidth){
+				let self=this,w=window.innerWidth,h=window.innerHeight,
+					scrollTop=window.pageYOffset || document.body.scrollTop,
+					abs_x=e.pageX-e.offsetX,
+					abs_y=e.pageY-scrollTop-e.offsetY;
+				if(document.documentElement&&document.documentElement.clientHeight&&document.documentElement.clientWidth){
 					h = document.documentElement.clientHeight;
 					w = document.documentElement.clientWidth;
 				}
@@ -67,7 +73,6 @@
 							left = 0
 						}else if(left+self.$el.offsetWidth>w){
 							left = w-self.$el.offsetWidth
-							
 						}
 						if(top<0){
 							top = 0
@@ -81,7 +86,29 @@
 					}
 				})
 				
+				
 			},
+			windowResize(){
+				let self=this,w=window.innerWidth,h=window.innerHeight;
+				if(document.documentElement&&document.documentElement.clientHeight&&document.documentElement.clientWidth){
+					h = document.documentElement.clientHeight;
+					w = document.documentElement.clientWidth;
+				}
+				window.addEventListener('resize',function(){
+					let moveOptions=self.moveOptions,leftStr=moveOptions.left;
+					if(typeof leftStr==='undefined')return;
+					let left=parseInt(leftStr),top=parseInt(moveOptions.top),
+						isChange=leftStr.indexOf('%')===-1?true:false;
+					if(isChange){
+						self.moveOptions={
+							left:(left/w*100).toString()+'%',
+							top:(top/h*100).toString()+'%',
+						}
+					}
+				});
+			}
 		}
+
 	}
+	
 </script>

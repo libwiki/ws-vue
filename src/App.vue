@@ -116,7 +116,7 @@ export default {
   name: 'app',
   created(){
     //this.$msg('这是提示信息1')
-    this.$msgbox('这是提示信息0000','标题标题121231',this.btnList)
+    //this.$msgbox('这是提示信息0000','标题标题121231',this.btnList)
     //this.$msgbox('内容区域二22222222222222222222',)
     // let table = document.createElement("H1");
     // table.id = "table";
