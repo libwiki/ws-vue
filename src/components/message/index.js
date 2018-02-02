@@ -1,13 +1,15 @@
 import Message from './message'
 Message.Instance=function(Vue){
-	const Instance=new Vue({
-		data:{
-			opacity:0.75,
-			show:false,
-			autoClose:true,
-			duration:1800,
-			timer:null,
-			message:'',
+	let Instance=Vue.extend({
+		data(){
+			return {
+				opacity:0.75,
+				show:false,
+				autoClose:true,
+				duration:1800,
+				timer:null,
+				message:'',
+			}
 		},
 		render(h){
 			return h(Message,{
@@ -24,31 +26,28 @@ Message.Instance=function(Vue){
 				this.message=message
 				if(duration!==null)this.duration=duration;
 				if(opacity!==null)this.opacity=opacity;
+				this.$modal.open(false).then(ele=>{
+					ele.appendChild(this.$mount().$el);
+				})
+				this.open();
 				if(this.timer!==null){
 					clearTimeout(this.timer)
 					this.timer=null
 				}
-				if(this.autoClose)this.close()
+				if(this.autoClose)this.close();
 			},
-			open(){
-				this.show=true
+			open(val=true){
+				this.show=val;
 			},
 			close(){
 				this.timer=setTimeout(_=>{
-					this.show=false
+					this.open(false);
 				},this.duration)
-			}
-
+			},
 		},
 		
 	})
-	document.body.appendChild(Instance.$mount().$el)
-	return {
-		message(message,duration){
-			if(!message)return;
-			Instance.setMsg(message,duration)
-			Instance.open()
-		},
-	}
+	Instance=new Instance();
+	return Instance;
 }
 export default Message

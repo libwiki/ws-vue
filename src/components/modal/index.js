@@ -1,11 +1,13 @@
 import Modal  from './modal'  
 Modal.Instance=function(Vue){
-	const Instance=new Vue({
-		data:{
-			defaultZIndex:20180111,
-			list:{},
-			isClickClose:true,
-			show:false,
+	let Instance=Vue.extend({
+		data(){
+			return {
+				defaultZIndex:20180111,
+				list:{},
+				isClickClose:true,
+				show:false,
+			}
 		},
 		render(h){
 			let self=this;
@@ -77,6 +79,7 @@ Modal.Instance=function(Vue){
 			},
 	    }
 	})
+	Instance=new Instance();
     document.body.appendChild(Instance.$mount().$el);
     window.addEventListener('keydown',function(e){
 	  if(e.keyCode===27){

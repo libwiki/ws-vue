@@ -115,8 +115,8 @@ import mixins from './mixins'
 export default {
   name: 'app',
   created(){
-    //this.$msg('这是提示信息1')
-    //this.$msgbox('这是提示信息0000','标题标题121231',this.btnList)
+    // this.$msg('这是提示信息1')
+    // this.$msgbox('这是提示信息0000','标题标题121231',this.btnList)
     //this.$msgbox('内容区域二22222222222222222222',)
     // let table = document.createElement("H1");
     // table.id = "table";
@@ -207,6 +207,7 @@ export default {
   methods:{
     btnClick(e,item){
       console.log(e,item);
+      this.$messagebox.close()
     },
     close(e){
       this.show=false;

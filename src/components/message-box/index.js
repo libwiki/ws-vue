@@ -1,12 +1,14 @@
 import MessageBox from './message-box'
 MessageBox.Instance=Vue=>{
-	return new Vue({
-		data:{
-			title:'',
-			content:'',
-			show:false,
-			btnList:[],
-			modal:true,
+	let Instance=Vue.extend({
+		data(){
+			return {
+				title:'',
+				content:'',
+				show:false,
+				btnList:[],
+				modal:true,
+			}
 		},
 		render(h){
 			return h(MessageBox,{
@@ -23,16 +25,19 @@ MessageBox.Instance=Vue=>{
 			})
 		},
 		methods:{
-			open(content='',title='',options=[],modal=false){
-				this.content=content;
-				this.title=title;
-				this.show=true;
-				this.btnList=options;
-				this.modal=modal;
+			open(content,title,options,modal){
+				this.setData(true,content,title,options,modal);
 				this.$modal.add(MessageBox.name,this)
 				this.$modal.open(this.modal&&this.show).then(ele=>{
 					ele.appendChild(this.$mount().$el);
 				})
+			},
+			setData(show=false,content='',title='',options=[],modal=true){
+				this.show=show;
+				this.content=content;
+				this.title=title;
+				this.btnList=options;
+				this.modal=modal;
 			},
 			close(){
 				this.show=false;
@@ -40,5 +45,7 @@ MessageBox.Instance=Vue=>{
 			},
 		}
 	})
+	Instance=new Instance();
+	return Instance;
 }
 export default MessageBox

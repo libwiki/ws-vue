@@ -32,19 +32,21 @@ const install=function(Vue,options={}){
         Vue.component(key, components[key]);
     })
 	
+	const Messagebox=MessageBox.Instance(Vue)
     Vue.prototype.TWEEN=TWEEN;
     Vue.prototype.$modal=Modal.Instance(Vue);
-    Vue.prototype.$msg=Message.Instance(Vue).message;
-    Vue.prototype.$msgbox=MessageBox.Instance(Vue).open;
+    Vue.prototype.$msg=Message.Instance(Vue).setMsg;
+    Vue.prototype.$messagebox=Messagebox;
+    Vue.prototype.$msgbox=Messagebox.open;
 }
 
-if (typeof window !== 'undefined' && window.Vue) {
+if(typeof window !=='undefined'&&window.Vue){
     install(window.Vue)
 }
-const api={
+const Api={
 	version:'1.0.0',
 	install,
 	...components,
 }
 
-export default api
+export default Api
