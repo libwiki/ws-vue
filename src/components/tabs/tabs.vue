@@ -22,8 +22,6 @@
 	</div>
 </template>
 <script>
-	import {Animates} from '../base'
-	import Icon from '../icon'
 	import mixins from '../../mixins'
 	export default {
 		name:'Tabs',

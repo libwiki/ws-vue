@@ -6,21 +6,18 @@
 		<Icon :class="prevClass" :style="arrowStyle" icon="return" :size="40" @click="prev"></Icon>
 		<Icon :class="nextClass" :style="arrowStyle" icon="enter" :size="40" @click="next"></Icon>
 		<ul :class="[prefix+'-nav']" v-if="items">
-			<li v-for="(item,i) of items" :class="i===current?'hover':''" @click="triggerClick(i)" @mouseover="triggerHover(i)"></li>
+			<li v-for="(item,i) of items" :class="i===current?'hover':''" @click="triggerClick(i)" @mouseover="triggerHover(i)" @mouseout="triggerOut"></li>
 		</ul>
 	</div>
 </template>
 <script>
-	import Icon from '../icon'
-	import {Animates} from '../base'
-	import {CarouselItem} from './carousel-item'
 	export default {
 		name:'Carousel',
 		props:{
 			width:String,
 			height:String,
 			index:{type:Number,default:0},
-			trigger:{type:String,default:'click'},
+			trigger:{type:String,default:'hover'},
 			arrow:{type:String,default:'hover'},
 			autoplay:{type:Boolean,default:true},
 			duration:{type:Number,default:4000},
@@ -32,6 +29,8 @@
 				prefix:'ws-carousel',
 				direction:'right',
 				timer:null,
+				hoverTimer:null,
+				slideAble:0,
 				items:null,
 				current:this.index,
 				prevIndex:0,
@@ -86,7 +85,6 @@
 			this.init();
 			this.play()
 			this.slide();
-
 		},
 		computed:{
 			style(){
@@ -138,20 +136,28 @@
 			},
 			//实际的切换
 			slide(){
-				if(this.items===null)return;
+				if(this.slideAble>0)return;
+				if(this.hoverTimer!==null){
+					clearTimeout(this.hoverTimer);
+					this.hoverTimer=null;
+				}
 				this.items.forEach((item,index)=>{
 					if(this.current===index){
-						item.show=true;
 						item.animate=this.animateClass.in;
+						item.show=true;
 					}else{
 						item.animate=this.animateClass.out;
+						this.slideAble=Date.now();
+						setTimeout(_=>{
+							item.show=false;
+							this.slideAble=0;	
+						},950)
 					}
 				})
 				this.$emit('slide',this.current,this.prevIndex)
 			},
-			//点击时间限制(待完成)
 			prev(e){
-				if(this.items===null)return;
+				if(this.items===null||this.slideAble>0)return;
 				let current=this.current;
 				this.direction='left';
 				current--;
@@ -165,7 +171,7 @@
 				this.$emit('prev',e,this.current)
 			},
 			next(e){
-				if(this.items===null)return;
+				if(this.items===null||this.slideAble>0)return;
 				let current=this.current;
 				this.direction='right';
 				current++;
@@ -180,6 +186,7 @@
 			},
 			//鼠标点击菜单切换
 			triggerClick(val){
+				if(this.slideAble>0)return;
 				if(this.trigger==='click'&&this.current!==val){
 					if(this.current<val||(val===0&&this.current!==1)){
 						this.direction='right';
@@ -194,6 +201,13 @@
 			},
 			//鼠标经过菜单切换
 			triggerHover(val){
+				if(this.slideAble>0){
+					let diffTime=950-(Date.now()-this.slideAble);
+					this.hoverTimer=setTimeout(_=>{
+						this.triggerHover(val);
+					},diffTime);
+					return;
+				}
 				if(this.trigger==='hover'&&this.current!==val){
 					if(this.current<val||(val===0&&this.current!==1)){
 						this.direction='right';
@@ -204,6 +218,17 @@
 					this.current=val;
 					this.slide()
 					this.play()
+				}
+			},
+			triggerOut(){
+				if(this.hoverTimer!==null){
+					if(typeof this.hoverTimer==='object'){
+						this.hoverTimer.forEach((item,index)=>{
+							if(index>0)clearTimeout(item);
+						});
+						
+					}
+					
 				}
 			},
 			//箭头的显示

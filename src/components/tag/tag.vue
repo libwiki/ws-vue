@@ -6,7 +6,6 @@
 	</span>
 </template>
 <script>
-	import Icon from '../icon'
 	import mixins from '../../mixins'
 	export default{
 		name:'Tag',

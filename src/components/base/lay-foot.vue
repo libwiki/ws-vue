@@ -6,7 +6,6 @@
 	</div>
 </template>
 <script>
-	import Button from '../button'
 	export default{
 		name:'LayHead',
 		props:{

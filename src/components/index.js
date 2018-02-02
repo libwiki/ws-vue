@@ -11,6 +11,7 @@ import Tag from './tag'
 import Tabs from './tabs'
 import {Carousel,CarouselItem} from './carousel'
 import Tooltip from './tooltip'
+import * as Form from './form'
 
 const components={
 	...Base,
@@ -24,6 +25,7 @@ const components={
 	Carousel,
 	CarouselItem,
 	Tooltip,
+	...Form,
 }
 
 const install=function(Vue,options={}){
@@ -31,7 +33,7 @@ const install=function(Vue,options={}){
 	Object.keys(components).forEach(key => {
         Vue.component(key, components[key]);
     })
-	
+
 	const Messagebox=MessageBox.Instance(Vue)
     Vue.prototype.TWEEN=TWEEN;
     Vue.prototype.$modal=Modal.Instance(Vue);

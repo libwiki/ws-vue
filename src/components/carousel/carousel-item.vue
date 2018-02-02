@@ -7,7 +7,6 @@
 	</div>
 </template>
 <script>
-	import {Animates} from '../base'
 	export default {
 		name:'CarouselItem',
 		data(){

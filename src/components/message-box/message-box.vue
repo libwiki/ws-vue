@@ -6,7 +6,6 @@
 	</div>
 </template>
 <script>
-	import {LayHead,LayBody,LayFoot} from '../base'
 	export default {
 		name:'MessageBox',
 		props:{

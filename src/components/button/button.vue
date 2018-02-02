@@ -5,7 +5,6 @@
 	</div>
 </template>
 <script>
-	import Icon from '../icon'
 	export default{
 		name:'Button',
 		data(){

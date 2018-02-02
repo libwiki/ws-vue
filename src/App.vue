@@ -71,6 +71,12 @@
         <p v-show="show">asdasdasdasd</p>
       </Animates>
     </p>
+
+    <p style="padding-top:50px;padding-bottom:30px;">
+      <Input v-model="number" icon="manyi" iconColor="#f00" iconBefore="manyi">这是开头：</Input> 
+    </p>
+
+
     <p style="padding-top:30px;">
       <input type="text" v-model="number" style="border:solid 1px #ccc;">{{animatedNumber}}
     </p>
@@ -107,6 +113,8 @@
         </template>
       </Tabs>
     </p>
+
+    
   </div>
 </template>
 
