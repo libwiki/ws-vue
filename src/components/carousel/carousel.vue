@@ -6,7 +6,7 @@
 		<Icon :class="prevClass" :style="arrowStyle" icon="return" :size="40" @click="prev"></Icon>
 		<Icon :class="nextClass" :style="arrowStyle" icon="enter" :size="40" @click="next"></Icon>
 		<ul :class="[prefix+'-nav']" v-if="items">
-			<li v-for="(item,i) of items" :class="i===current?'hover':''" @click="triggerClick(i)" @mouseover="triggerHover(i)" @mouseout="triggerOut"></li>
+			<li v-for="(item,i) of items" :class="i===current?'hover':''" @click="triggerClick(i)" @mouseover="triggerHover(i)"></li>
 		</ul>
 	</div>
 </template>
@@ -203,6 +203,7 @@
 			triggerHover(val){
 				if(this.slideAble>0){
 					let diffTime=950-(Date.now()-this.slideAble);
+					if(this.hoverTimer!==null)clearTimeout(this.hoverTimer);
 					this.hoverTimer=setTimeout(_=>{
 						this.triggerHover(val);
 					},diffTime);
@@ -218,17 +219,6 @@
 					this.current=val;
 					this.slide()
 					this.play()
-				}
-			},
-			triggerOut(){
-				if(this.hoverTimer!==null){
-					if(typeof this.hoverTimer==='object'){
-						this.hoverTimer.forEach((item,index)=>{
-							if(index>0)clearTimeout(item);
-						});
-						
-					}
-					
 				}
 			},
 			//箭头的显示
