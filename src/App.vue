@@ -73,9 +73,22 @@
     </p>
 
     <p style="padding-top:50px;padding-bottom:30px;">
-      <Input v-model="number" icon="manyi" iconColor="#f00" iconBefore="manyi">这是开头：</Input> 
+      <Input v-model="number" placeholder="默认值..." icon="manyi" iconColor="#f00" iconBefore="manyi" minWidth="200px" clearable readonly bgColor="#eee">这是开头：</Input> 
     </p>
-
+    <p style="padding-top:50px;padding-bottom:30px;">
+      <Select placeholder="请选择" v-model="selectVal">
+        <Option value="擦艾丹123"></Option>
+        <Option value="擦艾丹"></Option>
+        <Option value="列表擦艾丹"></Option>
+      </Select>
+      <Select placeholder="请选择"  v-model="selectVal2" size="xs">
+        <Option value="1" label="这是一、二、三"></Option>
+        <Option value="2">四、五、六</Option>
+        <Option value="3"></Option>
+        <Option value="4"></Option>
+        <Option value="5"></Option>
+      </Select>
+    </p>
 
     <p style="padding-top:30px;">
       <input type="text" v-model="number" style="border:solid 1px #ccc;">{{animatedNumber}}
@@ -158,6 +171,8 @@ export default {
     return {
       show:true,
       a:{},
+      selectVal:'擦艾丹123',
+      selectVal2:'',
       number:0,
       animatedNumber:0,
       val:'aaaa',

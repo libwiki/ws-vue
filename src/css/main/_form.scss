@@ -4,25 +4,33 @@
 	height: auto;
 	box-shadow: 0 0 0 1px $bg-color5;
 	border-radius: 3px;
-	&:hover{
+	&:not(.disabled):hover{
 		box-shadow: 0 0 0 1px $bg-color7;
 	}
-	&.hover{
+	&:not(.disabled).hover{
 		box-shadow: 0 0 1px 1px $bg-info;
 	}
 	.ws-input-before,.ws-input-after{
 		float: left;
 		height: 30px;
 		line-height: 30px;
-		padding-left: 5px;
-		padding-right: 5px;
+		padding:0 5px;
 		color: $bg-color9;
 		cursor: default;
 		i{
-			color: $bg-color9;
+			color: $bg-color8;
 		}
 		@include no-select;
+		.clearable{
+			cursor: pointer;
+			&:hover{
+				color: #fff;
+				background-color: $bg-danger;
+				border-radius: 50%;
+			}
+		}
 	}
+	
 	.ws-input-main{
 		float: left;
 		padding: 0 5px;
@@ -30,5 +38,65 @@
 		border-radius: 2px;
 		border-left: solid 1px $bg-color5;
 		border-right: solid 1px $bg-color5;
+		color:$bg-color0;
+	}
+	&.ws-input-lg{
+		.ws-input-before,.ws-input-after{
+			height: 40px;
+			line-height: 40px;
+			padding:0 10px;
+		}
+		.ws-input-main{
+			line-height: 40px;
+		}
+	}
+	&.ws-input-xs{
+		.ws-input-before,.ws-input-after{
+			height: 25px;
+			line-height: 25px;
+		}
+		.ws-input-main{
+			line-height: 25px;
+		}
+	}
+}
+.ws-select{
+	display: inline-block;
+	position: relative;
+	background-color: #eee;
+	.ws-select-main{
+		z-index: 20170205;
+		display: inline-block;
+		position: absolute;
+		min-width: 100%;
+		left: 0px;
+		margin-top: 3px;
+		background-color: #fff;
+		text-align: left;
+		border: solid 1px $bg-color3;
+		box-shadow: 1px 0 2px $bg-color4;
+		border-radius: 2px;
+		@include no-wrap;
+		.ws-option{
+			line-height: 30px;
+			padding: 0 7px;
+			cursor: pointer;
+			color:$bg-color0;
+			&.hover{
+				background-color: $bg-info;
+				color: #fff;
+			}
+			&:not(.hover):hover{
+				background-color: $bg-color3;
+			}
+		}
+	}
+	.ws-select-lg .ws-option{
+		line-height: 38px;
+		padding: 0 10px;
+	}
+	.ws-select-xs .ws-option{
+		line-height: 25px;
+		padding: 0 5px;
 	}
 }

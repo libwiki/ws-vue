@@ -13,6 +13,14 @@ textarea,input,button{outline: none;border-width: 0px;}
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
 }
+.readonly{
+	cursor: pointer;
+}
+.disabled{
+	cursor: not-allowed;
+	background-color: $bg-color;
+}
+
 @mixin no-wrap{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 @mixin no-select{user-select:none;}
 @mixin m-x5{margin-left: 5px;margin-right: 5px;}
@@ -27,4 +35,29 @@ textarea,input,button{outline: none;border-width: 0px;}
 @mixin tag-lg{padding: 10px 15px;}
 @mixin tag-sm{padding: 5px 10px;}
 @mixin tag-xs{padding: 3px 8px;}
-
+//暂无数据
+.no-data{
+	text-align: center;
+	line-height: 30px;
+	color: $bg-color8;
+	cursor: default;
+	@include no-select;
+}
+/*滚动条*/  
+::-webkit-scrollbar{  
+	border-radius: 10px;
+    width: 13px;  
+    height: 13px; 
+    background-color: $bg-color4; 
+}  
+::-webkit-scrollbar-thumb{  
+    border-radius: 10px;  
+    background-color: $bg-color7; 
+}
+/*IE*/
+body{
+	scrollbar-face-color: $bg-color7; /*立体滚动条的颜色*/
+	scrollbar-track-color: $bg-color4; /*立体滚动条背景颜色*/
+    scrollbar-arrow-color: $bg-color7; /*三角箭头的颜色*/   
+    scrollbar-shadow-color: $bg-color7; /*立体滚动条阴影的颜色*/   
+}

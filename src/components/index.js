@@ -1,5 +1,6 @@
 import 'animate.css'; // https://daneden.github.io/animate.css/
 import TWEEN from '@tweenjs/tween.js'; // https://github.com/tweenjs/tween.js/
+import store from '@/store' // 父子组件通讯数据存贮
 import * as Base from './base'
 import Icon from './icon'
 import {Button,BtnGroup} from './button'
@@ -12,6 +13,7 @@ import Tabs from './tabs'
 import {Carousel,CarouselItem} from './carousel'
 import Tooltip from './tooltip'
 import * as Form from './form'
+
 
 const components={
 	...Base,
@@ -34,7 +36,9 @@ const install=function(Vue,options={}){
         Vue.component(key, components[key]);
     })
 
-	const Messagebox=MessageBox.Instance(Vue)
+	store.Instance(Vue);// 父子组件通讯数据存贮实例初始化
+
+	const Messagebox=MessageBox.Instance(Vue);
     Vue.prototype.TWEEN=TWEEN;
     Vue.prototype.$modal=Modal.Instance(Vue);
     Vue.prototype.$msg=Message.Instance(Vue).setMsg;
