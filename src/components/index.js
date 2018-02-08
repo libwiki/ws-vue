@@ -13,6 +13,7 @@ import Tabs from './tabs'
 import {Carousel,CarouselItem} from './carousel'
 import Tooltip from './tooltip'
 import * as Form from './form'
+import * as Dates from './date'
 
 
 const components={
@@ -28,11 +29,12 @@ const components={
 	CarouselItem,
 	Tooltip,
 	...Form,
+	...Dates,
 }
 
 const install=function(Vue,options={}){
 	if(install.installed)return;
-	Object.keys(components).forEach(key => {
+	Object.keys(components).forEach(key=>{
         Vue.component(key, components[key]);
     })
 
@@ -49,10 +51,7 @@ const install=function(Vue,options={}){
 if(typeof window !=='undefined'&&window.Vue){
     install(window.Vue)
 }
-const Api={
+export default{
 	version:'1.0.0',
-	install,
-	...components,
+	install
 }
-
-export default Api

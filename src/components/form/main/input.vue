@@ -9,7 +9,7 @@
 		<span :class="[prefix+'-after']" :ref="prefix+'-after'" :style="afterStyle" @click="afterClick">
 			<slot name="after">
 				<Icon :icon="icon" :color="iconColor" v-if="icon&&!clearable"></Icon>
-				<Icon icon="cuowuguanbiquxiao" v-if="clearable" class="clearable" @click="clear"></Icon>
+				<Icon icon="cuowuguanbiquxiao" v-if="clearable" v-show="hasValue" class="clearable" @click="clear"></Icon>
 			</slot>
 		</span>
 	</span>
@@ -57,6 +57,9 @@
 			this.init();
 		},
 		computed:{
+			hasValue(){
+				return this.value.toString().length>0;
+			},
 			inputWidth(){
 				//仅当设置了最小宽度和最大宽度时input可随内容变换
 				if(!this.minWidth||!this.maxWidth)return 0;

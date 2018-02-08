@@ -76,6 +76,7 @@
       <Input v-model="number" placeholder="默认值..." icon="manyi" iconColor="#f00" iconBefore="manyi" minWidth="200px" clearable readonly bgColor="#eee">这是开头：</Input> 
     </p>
     <p style="padding-top:50px;padding-bottom:30px;">
+      {{selectVal}}
       <Select placeholder="请选择" v-model="selectVal">
         <Option value="擦艾丹123"></Option>
         <Option value="擦艾丹"></Option>
@@ -88,6 +89,10 @@
         <Option value="4"></Option>
         <Option value="5"></Option>
       </Select>
+      {{selectVal2}}
+    </p>
+    <p style="padding-top:50px;padding-bottom:30px;">
+      <Date></Date>
     </p>
 
     <p style="padding-top:30px;">

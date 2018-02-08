@@ -1,6 +1,6 @@
 <template>
 	<div :class="prefix">
-		<Input :icon="dropIcon" :size="size" :value="value" @click="click" :placeholder="placeholder" bgColor="#fff" readonly></Input>
+		<Input :icon="dropIcon" :size="size" :value="label" @click="click" :placeholder="placeholder" bgColor="#fff" readonly></Input>
 		<div v-show="drop" :class="mainClass">
 			<slot>
 				<p class="no-data">暂无数据</p>
@@ -22,6 +22,7 @@
 				prefix:'ws-select',
 				drop:false,
 				sign:true,
+				label:this.value,
 			}
 		},
 		computed:{
@@ -50,7 +51,8 @@
 				store.store.$on('ws-option-selected',data=>{
 					if(this._uid===data._uid){
 						if(typeof data.value!=='undefine'){
-							this.$emit('input',data.value)
+							this.$emit('input',data.value);
+							this.label=data.label;
 						}
 						this.drop=false;
 					}

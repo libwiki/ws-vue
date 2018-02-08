@@ -1,0 +1,23 @@
+.ws-date{
+	background-color: #fff;
+	box-sizing:border-box;
+	display: inline-block;
+	border-collapse: collapse;
+	box-shadow: 0 0 2px 1px $bg-color4;
+	border-radius: 2px;
+	.ws-date-row{
+		width: auto;
+		height: auto;
+		display: table-row;
+		.ws-date-col{
+			font-size: 13px;
+			color: $bg-color9;
+			display: table-cell;
+			&.date{
+				width: 28px;
+				line-height: 28px;
+			}
+		}
+	}
+
+}

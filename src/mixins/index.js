@@ -51,5 +51,56 @@ export default {
                 }).start();
             animate();
         },
+        /**
+         * 前置补 '0' 操作
+         * @param  {Number|String} num|string 数值
+         * @param  {Number} length 总长度
+         * @param  {String} char   补值
+         * @return {String}        
+         */
+        prefixInteger(num, length,char='0') {
+            return(Array(length).join(char)+num).slice(-length);
+        },
+        /**
+         * 获取日期信息的数组
+         * @param  {String} val 默认为当前时间
+         * @return {Array}     
+         */
+        getDate(val=Date.now()){
+            let date=new Date(val),
+            dayNums=[31,28,31,30,31,30,31,31,30,31,30,31],
+            dateArray=[
+                date.getFullYear(),//0. 年份(4位)
+                this.prefixInteger(date.getMonth(),2),//1. 月份(0~11)
+                this.prefixInteger(date.getDate(),2),//2. 1~31
+                this.prefixInteger(date.getHours(),2),//3. 小时(0~23)
+                this.prefixInteger(date.getMinutes(),2),//4. 分钟(0-59)
+                this.prefixInteger(date.getSeconds(),2),//5. 秒数(0-59)
+                date.getMilliseconds(),//6. 毫秒数(0-999)
+                date.getTime(),//7. 总毫秒
+                date.getDay(),//8. 星期(0~6)
+            ];
+            //9. 是否闰年
+            if(dateArray[0]%4===0&&dateArray[0]%100!==0||dateArray[0]%400===0){
+                dateArray.push(true);
+            }else{
+                dateArray.push(false);
+            }
+            //10. 当月天数
+            if(dateArray[9]&&parseInt(dateArray[1])===1){
+                dateArray.push(29);
+            }else{
+                dateArray.push(dayNums[parseInt(dateArray[1])]);
+            }
+            //11. 当月一号 星期数（0~6）
+            let d;
+            if(parseInt(dateArray[2])===1){
+                d=dateArray;
+            }else{
+                d=this.getDate(parseInt(dateArray[0])+'-'+(parseInt(dateArray[1])+1)+'-1');
+            }
+            dateArray.push(d[8]);
+            return dateArray;
+        },
 	},
 }
