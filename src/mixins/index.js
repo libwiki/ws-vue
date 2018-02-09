@@ -66,7 +66,17 @@ export default {
          * @param  {String} val 默认为当前时间
          * @return {Array}     
          */
-        getDate(val=Date.now()){
+        wsDate(val){
+            if(typeof val === 'string'){
+                if(val.trim().length===0){
+                    val=Date.now();
+                }else{
+                   val=val+' '; 
+                }
+            }else if(typeof val === 'number'&&val.toString().length===10){
+                val*=1000;
+            }
+            val=val||Date.now()
             let date=new Date(val),
             dayNums=[31,28,31,30,31,30,31,31,30,31,30,31],
             dateArray=[
@@ -77,7 +87,7 @@ export default {
                 this.prefixInteger(date.getMinutes(),2),//4. 分钟(0-59)
                 this.prefixInteger(date.getSeconds(),2),//5. 秒数(0-59)
                 date.getMilliseconds(),//6. 毫秒数(0-999)
-                date.getTime(),//7. 总毫秒
+                date.getTime(),//7. 总毫秒(时间戳)
                 date.getDay(),//8. 星期(0~6)
             ];
             //9. 是否闰年
@@ -97,10 +107,38 @@ export default {
             if(parseInt(dateArray[2])===1){
                 d=dateArray;
             }else{
-                d=this.getDate(parseInt(dateArray[0])+'-'+(parseInt(dateArray[1])+1)+'-1');
+                d=this.wsDate(parseInt(dateArray[0])+'-'+(parseInt(dateArray[1])+1)+'-1');
             }
             dateArray.push(d[8]);
+
+            //12. 月份（1~12）
+            dateArray.push(this.prefixInteger(parseInt(dateArray[1])+1,2));                
             return dateArray;
+        },
+        /**
+         * 日期格式化 
+         * @param  {Array|String} date  由wsDate()函数获得的时间数组、时间、时间戳
+         * @param  {String} format    格式
+         * @return {String}           
+         */
+        dateFormat(date,format='Y-m-d H:i:s'){
+            if(typeof date!=='object'){
+                date=this.wsDate(date);
+            }
+            let o={
+                Y:0,
+                y:0,
+                m:12,
+                d:2,
+                H:3,
+                h:3,
+                i:4,
+                s:5,
+            };
+            Object.keys(o).forEach(key=>{
+                format=format.replace(key,date[o[key]]);
+            });
+            return format;
         },
 	},
 }

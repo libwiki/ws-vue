@@ -92,7 +92,7 @@
       {{selectVal2}}
     </p>
     <p style="padding-top:50px;padding-bottom:30px;">
-      <Date></Date>
+      <Date time="2018-12-02" @click="check"></Date>
     </p>
 
     <p style="padding-top:30px;">
@@ -233,6 +233,9 @@ export default {
     }
   },
   methods:{
+    check(val){
+      console.log(val)
+    },
     btnClick(e,item){
       console.log(e,item);
       this.$messagebox.close()
