@@ -92,7 +92,7 @@
       {{selectVal2}}
     </p>
     <p style="padding-top:50px;padding-bottom:30px;">
-      <Date time="2018-12-02" @click="check"></Date>
+      <Date time="2018-12-02" start="2018-11-02" @click="check"></Date>
     </p>
 
     <p style="padding-top:30px;">
@@ -233,8 +233,8 @@ export default {
     }
   },
   methods:{
-    check(val){
-      console.log(val)
+    check(val,val1){
+      console.log(val,val1)
     },
     btnClick(e,item){
       console.log(e,item);
