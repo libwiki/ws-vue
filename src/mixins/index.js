@@ -62,11 +62,13 @@ export default {
             return(Array(length).join(char)+num).slice(-length);
         },
         /**
-         * 获取日期信息的数组
-         * @param  {String} val 默认为当前时间
-         * @return {Array}     
+         * 获取时间戳
+         * @param  {Number|String} val 默认为当前时间
+         * @param  {Boolean} type 是否进行转化
+         * @return {int}       
          */
-        wsDate(val){
+        wsTime(val,type=false){
+            if(val===0)return 0;
             if(typeof val === 'string'){
                 if(val.trim().length===0){
                     val=Date.now();
@@ -74,7 +76,27 @@ export default {
                    val=val+' '; 
                 }
             }else if(typeof val === 'number'&&val.toString().length===10){
-                val*=1000;
+                if(type)val*=1000;
+            }
+            val=val||Date.now()
+            let date=new Date(val),time=date.getTime();
+            return time===NaN?0:time;
+        },
+        /**
+         * 获取日期信息的数组
+         * @param  {Number|String} val 默认为当前时间
+         * @param  {Boolean} type 是否进行转化
+         * @return {Array}     
+         */
+        wsDate(val,type=false){
+            if(typeof val === 'string'){
+                if(val.trim().length===0){
+                    val=Date.now();
+                }else{
+                   val=val+' '; 
+                }
+            }else if(typeof val === 'number'&&val.toString().length===10){
+                if(type)val*=1000;
             }
             val=val||Date.now()
             let date=new Date(val),
@@ -122,6 +144,7 @@ export default {
          * @return {String}           
          */
         dateFormat(date,format='Y-m-d H:i:s'){
+            let defaultVal=date;
             if(typeof date!=='object'){
                 date=this.wsDate(date);
             }
@@ -138,7 +161,10 @@ export default {
             Object.keys(o).forEach(key=>{
                 format=format.replace(key,date[o[key]]);
             });
-            return format;
+            if(format.indexOf('NaN')===-1){
+                return format;
+            }
+            return defaultVal;
         },
 	},
 }

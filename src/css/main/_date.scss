@@ -33,8 +33,11 @@
 			&.is-date{
 				position: relative;
 				cursor: pointer;
-				&.is-check:hover,&.is-check.is-range{
+				&.is-check:not(.is-disable):not(.is-selected):hover,&.is-check.is-range{
 					background-color: $bg-color;
+				}
+				&.is-disable:hover{
+					cursor: not-allowed;
 				}
 				&.is-check.is-selected{
 					background-color: $bg-info;

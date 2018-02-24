@@ -1,8 +1,8 @@
 <template>
 	<div :class="prefix">
-		<Input :placeholder="placeholder" :readonly="readonly" icon="rili1" v-model="val" @click="datePicker"></Input>
+		<Input :placeholder="placeholder" :readonly="true" icon="rili1" v-model="val" @click="datePicker"></Input>
 		<div :class="[prefix+'-main']" v-show="drop">
-			<Calendar :time="value" @click="checkDate"></Calendar>
+			<Calendar :time="value" :drop="drop" @click="checkDate"></Calendar>
 		</div>
 	</div>
 </template>
@@ -20,7 +20,11 @@
 			},
 			readonly:{
 				type:Boolean,
-				default:true
+				default:false
+			},
+			range:{
+				type:Boolean,
+				default:false
 			},
 		},
 		data(){
@@ -31,8 +35,13 @@
 			}
 		},
 		computed:{
-			val(){
-				return this.dateFormat(this.value,this.format);
+			val:{
+				get(){
+					return this.dateFormat(this.value,this.format);
+				},
+				set(val){
+					this.$emit('input',val);
+				}
 			}
 		},
 		mounted(){

@@ -35,7 +35,7 @@
 				type:[String,Number],
 				default:Date.now(),
 			},
-			start:{
+			min:{
 				type:[String,Number],
 				default:0,
 			},
@@ -52,6 +52,10 @@
 				default:false,
 			},
 			cancel:{
+				type:Boolean,
+				default:false,
+			},
+			drop:{
 				type:Boolean,
 				default:false,
 			},
@@ -104,18 +108,14 @@
 				this.removeOtherClass(this.className.range,oldVal);
 				this.addOtherClass(this.className.selected,newVal,newVal);
 			},
-			endTime(newVal,oldVal){console.log('endTime')
+			endTime(newVal,oldVal){
 				if(newVal===0){
 					this.removeOtherClass(this.className.range,this.startTime,oldVal);
 				}
 				this.addOtherClass(this.className.selected,newVal,newVal);
 			},
-			time(newVal,oldVal){
-				this.init();
-				this.addOtherClass(this.className.selected,newVal,newVal);
-			},
-			start(){
-				this.initStartTime();
+			drop(newVal,oldVal){
+				if(newVal)this.reset();
 			},
 		},
 		computed:{
@@ -132,6 +132,13 @@
 			this.init();
 		},
 		methods:{
+			reset(){
+				let date=this.wsDate(this.selectedTime);
+				this.year=date[0];
+				this.month=date[12];
+				this.date=date[2];
+				this.init();
+			},
 			init(){
 				this.initTime();
 				this.initDateView();
@@ -142,8 +149,9 @@
 				if(this.year===null)this.year=date[0];
 				if(this.month===null)this.month=date[12];
 				if(this.date===null)this.date=date[2];
-				this.dateArray=this.wsDate(this.getDate());
-				if(!this.range&&this.selectedTime===0)this.selectedTime=this.getDate();
+				let dateArray=this.wsDate(this.getDate());
+				this.dateArray=dateArray;
+				if(!this.range&&this.selectedTime===0)this.selectedTime=dateArray[7];
 			},
 			initStartTime(){
 				if(this.range){
@@ -168,18 +176,21 @@
 			},
 			initDateView(){
 				let dateView=[],col=7,dateArray=this.dateArray,
-				than=col-parseInt(dateArray[11]),
-				row=Math.ceil((parseInt(dateArray[10])-than)/col+1);
+					minTime=this.wsTime(this.min),
+					than=col-parseInt(dateArray[11]),
+					row=Math.ceil((parseInt(dateArray[10])-than)/col+1);
 				for(let i=0;i<row;i++){
 					let cols=[];
 					for(let j=1;j<=col;j++){
 						let number=i*col+j-dateArray[11];
 						if(number>0&&number<=dateArray[10]){
+							let timeStamp=this.wsDate(this.getDate(number))[7];
+
 							cols.push({
 								val:number,
-								timeStamp:this.wsDate(this.getDate(number))[7],
+								timeStamp:timeStamp,
 								isDate:true,
-								otherClass:[],
+								otherClass:[timeStamp<minTime?'is-disable':''],
 							});
 						}else{
 							cols.push({
@@ -236,6 +247,7 @@
 					let checkDay=dateView[row][col].val,//当天（10）
 						date=this.getDate(checkDay),//当天（2018-02-10）
 						checkDate=this.wsDate(date);//当天 (Array)
+					if(checkDate[7]<this.wsTime(this.min))return;
 					if(this.range){//范围选择
 						if(this.startTime===0){//首次点击设置起点
 							this.startTime=checkDate[7];
