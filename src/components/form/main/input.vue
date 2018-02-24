@@ -27,12 +27,12 @@
 			iconBefore:String,
 			icon:String,
 			iconColor:String,
+			size:String,
+			placeholder:String,
 			clearable:{
 				type:Boolean,
 				default:false
 			},
-			placeholder:String,
-			size:String,
 			readonly:{
 				type:Boolean,
 				default:false
@@ -130,6 +130,7 @@
 			},
 			clear(){
 				this.$emit('input','');
+				this.$emit('clear');
 			},
 			click(e){
 				this.$emit('click',e);

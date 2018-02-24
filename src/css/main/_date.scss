@@ -1,4 +1,4 @@
-.ws-date{
+.ws-calendar{
 	padding: 10px;
 	background-color: #fff;
 	box-sizing:border-box;
@@ -7,26 +7,26 @@
 	box-shadow: 0 0 2px 1px $bg-color4;
 	border-radius: 2px;
 	@include no-select;
-	.ws-date-title{
+	.ws-calendar-title{
 		line-height: 30px;
 		display: flex;
 		justify-content:space-around;
-		.ws-date-year,.ws-date-month,i,.ws-date-prev-year,.ws-date-next-year{
+		.ws-calendar-year,.ws-calendar-month,i,.ws-calendar-prev-year,.ws-calendar-next-year{
 			color: $bg-color7;
 			cursor: pointer;
 			&:hover{
 				color: $bg-info;
 			}
 		}
-		.ws-date-year,.ws-date-month{
+		.ws-calendar-year,.ws-calendar-month{
 			color: $bg-color9;
 		}
 	}
-	.ws-date-row{
+	.ws-calendar-row{
 		width: auto;
 		height: auto;
 		display: table-row;
-		.ws-date-col{
+		.ws-calendar-col{
 			font-size: 13px;
 			color: $bg-color0;
 			display: table-cell;
@@ -41,7 +41,7 @@
 					color: #fff;
 					border-radius: 2px;
 				}
-				.ws-date-sign{
+				.ws-calendar-sign{
 					position: absolute;
 					right: 9px;
 					bottom: 6px;
@@ -52,18 +52,30 @@
 				}
 			}
 		}
-		&.date .ws-date-col{
+		&.date .ws-calendar-col{
 			width: 30px;
 			line-height: 30px;
 		}
-		&.ws-date-head{
+		&.ws-calendar-head{
 			border-bottom: solid 1px $bg-color4;
 			cursor: default;
 			margin-bottom: 2px;
-			.ws-date-col{
+			.ws-calendar-col{
 				color: $bg-color8;
 			}
 		}
 	}
 
+}
+
+.ws-date{
+	display: inline-block;
+	position: relative;
+	.ws-date-main{
+		position: absolute;
+		left: 0px;
+		padding-top: 3px;
+		width: 230px;
+		z-index: 20170101;
+	}	
 }
