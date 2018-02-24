@@ -134,10 +134,10 @@
 			},
 			initTime(){
 				let date=this.wsDate(this.time);
-				this.year=date[0];
-				this.month=date[12];
-				this.date=date[2];
-				this.dateArray=date;
+				if(this.year===null)this.year=date[0];
+				if(this.month===null)this.month=date[12];
+				if(this.date===null)this.date=date[2];
+				this.dateArray=this.wsDate(this.getDate());
 			},
 			initStartTime(){
 				let startTime=this.wsDate(this.start)[7];
@@ -277,6 +277,7 @@
 			nextYear(){
 				let year=parseInt(this.year);
 				this.year=year+1;
+				console.log(year,this.year)
 				this.init();
 			},
 			prevMonth(){

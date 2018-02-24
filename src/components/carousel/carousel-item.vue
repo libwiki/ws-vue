@@ -1,5 +1,5 @@
 <template>
-	<div :class="classs" :style="style" v-show="show">
+	<div :class="classs" :style="style">
 		<slot></slot>
 		<div :class="[prefix+'-title']">
 			<slot name="title"></slot>
@@ -12,8 +12,8 @@
 		data(){
 			return {
 				prefix:'ws-carousel-item',
-				show:true,
 				animate:'',
+				zIndex:0,
 			}
 		},
 		props:{
@@ -22,7 +22,7 @@
 		},
 		computed:{
 			style(){
-				let style={};
+				let style={'z-index':this.zIndex};
 				if(this.bgColor)style['background-color']=this.bgColor;
 				if(this.height)style['height']=this.height;
 				return style;

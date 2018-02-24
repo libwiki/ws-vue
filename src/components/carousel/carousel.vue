@@ -1,5 +1,5 @@
 <template>
-	<div :class="prefix" :style="style" @mouseover="mouseover" @mouseout="mouseout">
+	<div :class="prefix" :style="style" @mouseenter="mouseenter" @mouseleave="mouseleave">
 		<div :class="[prefix+'-main']">
 			<slot></slot>
 		</div>
@@ -135,21 +135,20 @@
 				}
 			},
 			//实际的切换
-			slide(){
+			slide(nextIndex){
 				if(this.slideAble>0)return;
-				if(this.hoverTimer!==null){
-					clearTimeout(this.hoverTimer);
-					this.hoverTimer=null;
-				}
 				this.items.forEach((item,index)=>{
+					if(index===nextIndex){
+						item.zIndex=1;
+					}
 					if(this.current===index){
 						item.animate=this.animateClass.in;
-						item.show=true;
+						item.zIndex=2;
 					}else{
 						item.animate=this.animateClass.out;
 						this.slideAble=Date.now();
 						setTimeout(_=>{
-							item.show=false;
+							item.zIndex=0;
 							this.slideAble=0;	
 						},950)
 					}
@@ -166,12 +165,19 @@
 				}
 				this.prevIndex=this.current;
 				this.current=current;
-				this.slide()
+				this.slide(current-1)
 				this.play()
 				this.$emit('prev',e,this.current)
 			},
 			next(e){
 				if(this.items===null||this.slideAble>0)return;
+				if(this.slideAble>0){
+					let diffTime=950-(Date.now()-this.slideAble);
+					this.hoverTimer=setTimeout(_=>{
+						this.triggerHover(val);
+					},diffTime);
+					return;
+				}
 				let current=this.current;
 				this.direction='right';
 				current++;
@@ -180,7 +186,7 @@
 				}
 				this.prevIndex=this.current;
 				this.current=current;
-				this.slide()
+				this.slide(current+1)
 				this.play()
 				this.$emit('next',e,this.current)
 			},
@@ -195,15 +201,18 @@
 					}
 					this.prevIndex=this.current;
 					this.current=val;
-					this.slide()
+					this.slide(val)
 					this.play()
 				}
 			},
 			//鼠标经过菜单切换
 			triggerHover(val){
+				if(this.hoverTimer!==null){
+					clearTimeout(this.hoverTimer);
+					this.hoverTimer=null;
+				}
 				if(this.slideAble>0){
 					let diffTime=950-(Date.now()-this.slideAble);
-					if(this.hoverTimer!==null)clearTimeout(this.hoverTimer);
 					this.hoverTimer=setTimeout(_=>{
 						this.triggerHover(val);
 					},diffTime);
@@ -217,24 +226,24 @@
 					}
 					this.prevIndex=this.current;
 					this.current=val;
-					this.slide()
+					this.slide(val)
 					this.play()
 				}
 			},
 			//箭头的显示
-			mouseover(e){
+			mouseenter(e){
 				if(this.timer!==null){
 					clearInterval(this.timer);
 					this.timer=null;
 				}
 				if(this.arrow)this.arrowStatus=false;
-				this.$emit('mouseover',e,this.current)
+				this.$emit('mouseenter',e,this.current)
 			},
 			//箭头的隐藏
-			mouseout(e){
+			mouseleave(e){
 				this.play()
 				this.arrowStatus=true;
-				this.$emit('mouseout',e,this.current)
+				this.$emit('mouseleave',e,this.current)
 			}
 		}
 	}
