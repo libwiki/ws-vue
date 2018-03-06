@@ -91,8 +91,10 @@
       </Select>
       {{selectVal2}}
     </p>
+
+
     <p style="padding-top:50px;padding-bottom:30px;">
-      <Calendar min="2018-12-08" time="2018-12-12" start="2018-11-02" @click="check"></Calendar>
+      <Calendar min="2018-12-08" time="2018-12-12" end="2018-12-22" range @click="check"></Calendar>
     </p>
     <p style="padding-top:50px;padding-bottom:30px;">
       <Date placeholder="日期选择" v-model="dateVal"></Date>{{dateVal}}

@@ -1,9 +1,10 @@
 <template>
 	<div :class="prefix">
-		<Input :placeholder="placeholder" :readonly="true" icon="rili1" v-model="val" @click="datePicker"></Input>
+		<Input :placeholder="placeholder" :readonly="true" icon="rili1" v-model="value" @click="datePicker"></Input>
 		<div :class="[prefix+'-main']" v-show="drop">
-			<Calendar :time="value" :drop="drop" @click="checkDate"></Calendar>
+			<Calendar :time="startTime" :end="endTime" :drop="drop" @click="checkDate" :range="range" style="float:left;"></Calendar>
 		</div>
+
 	</div>
 </template>
 <script>
@@ -17,6 +18,10 @@
 			format:{
 				type:String,
 				default:'Y-m-d'
+			},
+			separator:{
+				type:String,
+				default:' ~ '
 			},
 			readonly:{
 				type:Boolean,
@@ -32,23 +37,32 @@
 				prefix:'ws-date',
 				drop:false,
 				sign:true,
+				startTime:0,
+				endTime:0
 			}
 		},
 		computed:{
-			val:{
-				get(){
-					return this.dateFormat(this.value,this.format);
-				},
-				set(val){
-					this.$emit('input',val);
-				}
-			}
+			// val:{
+			// 	get(){
+			// 		return this.dateFormat(this.value,this.format);
+			// 	},
+			// 	set(val){
+			// 		this.$emit('input',val);
+			// 	}
+			// },
+		},
+		created(){
+			let valDate=this.value.split(this.separator);
+			this.startTime=this.wsTime();
+			if(valDate[1])this.endTime=this.wsTime(valDate[1]);
+			
 		},
 		mounted(){
 			this.init();
 		},
 		methods:{
 			init(){
+				
 				this.$el.addEventListener('click',e=>{
 					if(this.drop){
 						this.sign=false
@@ -62,10 +76,21 @@
 					}
 				})
 			},
-			checkDate(val){
-				this.drop=false;
-				this.$emit('input',this.dateFormat(val.date,this.format));
-				this.$emit('check',val);
+			checkDate(start,end){
+				this.startDate=start.timeStamp
+				let val=this.dateFormat(start.timeStamp,this.format)
+				if(this.range){
+					this.endDate=end.timeStamp
+					val+=this.separator
+					if(end.timeStamp>0){
+						this.drop=false;
+						val+=this.dateFormat(end.timeStamp,this.format)
+					}
+				}else{
+					this.drop=false;
+				}
+				this.$emit('input',val);
+				this.$emit('check',start,end);
 			},
 			datePicker(){
 				this.drop=!this.drop;

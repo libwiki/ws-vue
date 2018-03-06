@@ -33,13 +33,21 @@
 			&.is-date{
 				position: relative;
 				cursor: pointer;
-				&.is-check:not(.is-disable):not(.is-selected):hover,&.is-check.is-range{
+				// &.is-check:not(.is-disable):not(.is-selected):hover,&.is-check.is-range{
+				// 	background-color: $bg-color;
+				// }
+				// &.is-check.is-selected{
+				// 	background-color: $bg-info;
+				// 	color: #fff;
+				// 	border-radius: 2px;
+				// }
+				&:not(.is-disable):not(.is-selected):hover,&.is-range{
 					background-color: $bg-color;
 				}
 				&.is-disable:hover{
 					cursor: not-allowed;
 				}
-				&.is-check.is-selected{
+				&.is-selected{
 					background-color: $bg-info;
 					color: #fff;
 					border-radius: 2px;
@@ -77,7 +85,7 @@
 	.ws-date-main{
 		position: absolute;
 		left: 0px;
-		padding-top: 3px;
+		padding-top: 2px;
 		width: 230px;
 		z-index: 20170101;
 	}	
