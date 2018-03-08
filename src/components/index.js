@@ -14,6 +14,7 @@ import {Carousel,CarouselItem} from './carousel'
 import Tooltip from './tooltip'
 import * as Form from './form'
 import * as Dates from './date'
+import Upload from './upload'
 
 
 const components={
@@ -30,6 +31,7 @@ const components={
 	Tooltip,
 	...Form,
 	...Dates,
+	Upload,
 }
 
 const install=function(Vue,options={}){
