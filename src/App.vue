@@ -71,7 +71,9 @@
         <p v-show="show">asdasdasdasd</p>
       </Animates>
     </p>
-
+    <p style="padding-top:50px;padding-bottom:30px;">1
+      <Upload></Upload> 
+    </p>
     <p style="padding-top:50px;padding-bottom:30px;">
       <Input v-model="number" placeholder="默认值..." icon="manyi" iconColor="#f00" iconBefore="manyi" minWidth="200px" clearable readonly bgColor="#eee">这是开头：</Input> 
     </p>

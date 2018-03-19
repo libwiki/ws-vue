@@ -1,0 +1,40 @@
+.ws-upload{
+	position: relative;
+	display: inline-block;
+	
+	.ws-upload-multiple{
+		background-color: #ccc;
+		img{
+			border-radius:5px;
+			width: 100%;
+			height: 100%;
+		}
+	}
+	.ws-upload-file{
+		display: inline-block;
+		border: dashed 1px $bg-color7;
+		border-radius:5px;
+		text-align: center;
+		position: relative;
+		@include no-select;
+		&:hover{
+			border-color: $bg-info;
+			transition:border-color 0.4s;
+		}
+		.ws-upload-file-icon{
+			font-size: 30px;
+			cursor: pointer;
+			color: $bg-color9;
+		}
+		.ws-upload-file-input,.ws-upload-file-img{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			left: 0px;
+			top: 0px;
+		}
+		.ws-upload-file-input{
+			opacity: 0;
+		}
+	}
+}
